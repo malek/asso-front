@@ -1,6 +1,21 @@
+
+
+@font-face {
+  font-family: 'SuperTea'; /* You can name it whatever you want */
+  src: url('./assets/fonts/Supertea.otf') format('opentype');
+  /* Add other font formats here if needed */
+}
+
 #root {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
+}
+h1 {
+  font-family: 'SuperTea', sans-serif; /* Use the custom font */
+}
+body {
+  font-family: 'SuperTea', sans-serif;
+  font-weight: 400;
 }
