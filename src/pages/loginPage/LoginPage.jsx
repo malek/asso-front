@@ -1,4 +1,10 @@
+import React from "react";
+import { Link } from "react-router-dom";
 const LoginPage = () => {
+  const lienStyle = {
+    color: "#7C048E", // Remplacez cette valeur par la couleur désirée
+    // Vous pouvez également ajouter d'autres styles ici, si nécessaire
+  };
   return (
     <div className="container p-4">
       <div className="d-flex flex-column align-items-center mb-5 mt-5">
@@ -32,6 +38,12 @@ const LoginPage = () => {
           </button>
         </form>
       </div>
+      <div className="d-flex flex-column align-items-center mb-5 mt-5">
+      <h1 className="fs-4">
+      Vous n'avez pas de compte ?{" "}
+        <Link to="/" style={lienStyle}> Inscrivez-vous sur AssoShare.</Link>
+      </h1>
+    </div>
     </div>
   );
 };

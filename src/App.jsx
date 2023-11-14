@@ -6,10 +6,10 @@ import HomeRoutes from "./routes/HomeRoutes";
 function App() {
   return (
     <BrowserRouter>
-        <Navbar />
-        <div className="pt-5 mt-2">
+        {/* <Navbar /> */}
+        {/* <div className="pt-5 mt-2"> */}
           <HomeRoutes />
-          </div>
+          {/* </div> */}
     </BrowserRouter>
   );
 }
