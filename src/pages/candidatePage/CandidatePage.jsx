@@ -1,46 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 const CandidatePage = () => {
+  const navigate = useNavigate();
   const buttonStyle = {
-    backgroundColor: "#7C048E", // Définissez la couleur personnalisée
-    padding: "10px 20px", // Add padding for a button-like appearance
-    textDecoration: "none", // Remove default link underline
-    color: "white", // Set text color
-    display: "inline-block", // Make it inline-block to set a specific width
+    backgroundColor: "#7C048E",
+    padding: "10px 20px",
+    textDecoration: "none",
+    color: "white",
+    display: "inline-block",
+    cursor: "pointer", // Add cursor style to indicate it's clickable
   };
 
   const [formIsValid, setFormIsValid] = useState(false);
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nom, setNom] = useState("");
-  const [prenom, setPrenom] = useState("");
+  // const [nom, setNom] = useState("");
+  // const [prenom, setPrenom] = useState("");
   const [dateNaissance, setDateNaissance] = useState("");
   const [ville, setVille] = useState("");
   const [numTel, setNumTel] = useState("");
-  const [description, setDescription] = useState("");
-  const [isBenevole, setIsBenevole] = useState("");
+  // const [description, setDescription] = useState("");
+   const [isBenevole, setIsBenevole] = useState("");
+
+  useEffect(() => {
+    const isValid = email && password && 
+                    dateNaissance && ville && numTel && 
+                    role;
+    setFormIsValid(isValid);
+  }, [email, password, dateNaissance, ville, numTel, role]);
+ 
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // Empêcher le rechargement de la page
+   
+    if (!formIsValid) return;
 
     const userData = {
       email: email,
       password: password,
-      nom: nom,
-      prenom: prenom,
+      nom: "nom",
+      prenom: "prenom",
       dateNaissance: dateNaissance,
       ville: ville,
       numTel: numTel,
-      description: description,
+      description: "description",
       isBenevole: isBenevole === 'Bénévole' // Assurez-vous que cette logique correspond à votre besoin
     };
     try {
-      // Remplacez 'URL_API' par l'URL réelle de votre API
-      console.log(userData);
-      const response = await axios.post('http://localhost:8000/api/users', userData);
-      console.log(response.data);
+      //  await axios.post('http://localhost:8000/api/users', userData);
+        navigate('/candidat2'); // Redirection vers la page des bénévoles
+
       // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
     } catch (error) {
       console.error('Erreur lors de l\'envoi du formulaire :', error);
@@ -55,42 +67,64 @@ const CandidatePage = () => {
     const inputs = document.querySelectorAll(
       "input[required], select[required]"
     );
-    const isValid = Array.from(inputs).every((input) => input.checkValidity());
+    // const isValid = Array.from(inputs).every((input) => input.checkValidity());
 
+    // setFormIsValid(isValid);
+
+    switch(e.target.id) {
+      case 'inputEmail':
+        setEmail(e.target.value);
+        break;
+      case 'inputmdp':
+        setPassword(e.target.value);
+        break;
+        case 'benevole':
+          setRole(e.target.value);
+        break;
+      case 'dob':
+        setDateNaissance(e.target.value);
+        break;
+        case 'ville':
+          setVille(e.target.value);
+        break;
+      case 'numTel':
+        setNumTel(e.target.value);
+        break;
+  };
+  // const handleEmailChange = (e) => {
+  //   setEmail(e.target.value);
+  // };
+
+  // const handlePasswordChange = (e) => {
+  //   setPassword(e.target.value);
+  // }
+  // const handleRoleChange = (e) => {
+  //   setRole(e.target.value);
+  // };
+  // const handleNomChange = (e) => {
+  //   setNom(e.target.value);
+  // };
+  // const handlePrenomChange = (e) => {
+  //   setPrenom(e.target.value);
+  // };
+  // const handleDateNaissanceChange = (e) => {
+  //   setDateNaissance(e.target.value);
+  // };
+  // const handleVilleChange = (e) => {
+  //   setVille(e.target.value);
+  // };
+  // const handleNumTelChange = (e) => {
+  //   setNumTel(e.target.value);
+  // };
+  // const handleDescriptionChange = (e) => {
+  //   setDescription(e.target.value);
+  // };
+    // Vérifier si le formulaire est valide
+    const isValid = Array.from(document.querySelectorAll("input[required], select[required]"))
+      .every(input => input.checkValidity());
     setFormIsValid(isValid);
-  };
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  }
-  const handleRoleChange = (e) => {
-    setRole(e.target.value);
-  };
-  const handleNomChange = (e) => {
-    setNom(e.target.value);
-  };
-  const handlePrenomChange = (e) => {
-    setPrenom(e.target.value);
-  };
-  const handleDateNaissanceChange = (e) => {
-    setDateNaissance(e.target.value);
-  };
-  const handleVilleChange = (e) => {
-    setVille(e.target.value);
-  };
-  const handleNumTelChange = (e) => {
-    setNumTel(e.target.value);
-  };
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  };
-  const handleIsBenevoleChange = (e) => {
-    setIsBenevole(e.target.value === 'benevole'); // Mettre à jour isBenevole
-  }
-
+   
+}
   return (
     <div className="container p-4">
       <div className="d-flex flex-column align-items-center mb-5 mt-5">
@@ -127,7 +161,7 @@ const CandidatePage = () => {
                   name="role"
                   value="benevole"
                   checked={role === "benevole"}
-                  onChange={handleRoleChange}
+                  onChange={handleInputChange} 
                 />
                 <label className="form-check-label" htmlFor="benevole">
                   Bénévole
@@ -143,7 +177,7 @@ const CandidatePage = () => {
                   name="role"
                   value="participant"
                   checked={role === "participant"}
-                  onChange={handleRoleChange}
+                  onChange={handleInputChange} 
                 />
                 <label className="form-check-label" htmlFor="participant">
                   Participant
@@ -152,43 +186,7 @@ const CandidatePage = () => {
             </Col>
           </Row>
         </div>
-        <div className="col-md-6">
-          <label htmlFor="inputNom" className="form-label">
-            Nom
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputNom"
-            value={nom}
-            onChange={handleNomChange}
-          />
-        </div>
-        <div className="col-md-6">
-          <label htmlFor="inputPrenom" className="form-label">
-            Prénom
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputPrenom"
-            value={prenom}
-            onChange={handlePrenomChange}
-          />
-        </div>
-        <div className="col-md-6">
-          <label htmlFor="inputDescription" className="form-label">
-            description
-          </label>
-          <textarea
-            type="text"
-            className="form-control"
-            id="inputDescription"
-            value={description}
-            onChange={handleDescriptionChange}
-            rows={4}
-          ></textarea>
-        </div>
+        
         <div className="col-md-6">
           <label htmlFor="inputEmail" className="form-label">
             Email
@@ -199,7 +197,7 @@ const CandidatePage = () => {
             id="inputEmail"
             placeholder=".....@...."
             value={email}
-            onChange={handleEmailChange}
+            onChange={handleInputChange} 
           />
         </div>
         <div className="col-md-6">
@@ -208,7 +206,7 @@ const CandidatePage = () => {
           </label>
           <input type="password" className="form-control" id="inputmdp" 
           value={password}
-          onChange={handlePasswordChange}
+          onChange={handleInputChange} 
           />
         </div>
 
@@ -218,7 +216,7 @@ const CandidatePage = () => {
           </label>
           <input type="date" id="dob" className="form-control" required
           value = {dateNaissance}
-          onChange= {handleDateNaissanceChange}
+          onChange={handleInputChange} 
            />
         </div>
         <div className="col-md-4">
@@ -232,7 +230,7 @@ const CandidatePage = () => {
             placeholder="Entrez votre ville"
             required
             value={ville}
-            onChange={handleVilleChange}
+            onChange={handleInputChange} 
           />
         </div>
         <div className="col-md-4">
@@ -246,14 +244,18 @@ const CandidatePage = () => {
             placeholder="Entrez votre numéro de téléphone"
             required
             value={numTel}
-            onChange={handleNumTelChange}
+            onChange={handleInputChange} 
           />
         </div>
         <div className="col-12">
-         
-                        <button type="submit" style={buttonStyle} >Envoyer</button>
-
+          <button 
+            type="submit" 
+            style={buttonStyle} 
+            disabled={!formIsValid}> 
+            Next
+          </button>
         </div>
+        
       </form>
     </div>
   );
