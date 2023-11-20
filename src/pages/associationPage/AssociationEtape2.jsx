@@ -56,7 +56,7 @@ const AssociationPage2 = () => {
     setAgreeTerms(!agreeTerms);
   };
 
-  
+
 
   return (
     <div className="container p-4">
@@ -73,7 +73,7 @@ const AssociationPage2 = () => {
             src={addAvatar}
             roundedCircle
             onClick={handleImageClick}
-            //style={buttonStyle}
+          //style={buttonStyle}
           />
           <label>Ajouter une photo</label>
         </div>

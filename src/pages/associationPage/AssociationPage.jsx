@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 const AssociationPage = () => {
+  const dispatch = useDispatch();
+
   const buttonStyle = {
     backgroundColor: "#7C048E", // Définissez la couleur personnalisée
     padding: "10px 20px", // Add padding for a button-like appearance
@@ -76,6 +78,8 @@ const AssociationPage = () => {
       password: password,
       isAsso: true
   }
+  dispatch(setFormData(userData));
+
   try {
     // const response = await axios.post('http://localhost:8000/api/users', userData);
       navigate('/WelcomeAsso'); // Redirection vers la page des bénévoles
