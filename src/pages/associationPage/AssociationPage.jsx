@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
+
 const AssociationPage = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const buttonStyle = {
     backgroundColor: "#7C048E", // Définissez la couleur personnalisée
@@ -14,45 +14,37 @@ const AssociationPage = () => {
     display: "inline-block", // Make it inline-block to set a specific width
   };
 
-  const [formIsValid, setFormIsValid] = useState(false);
-
-  const [bio, setBio] = useState("");
-  const [subscribe, setSubscribe] = useState(false);
   const [email, setEmail] = useState("");
   const [nom, setNom] = useState("");
-  const [description, setDescription] = useState("");
   const [rxNational, setRxNational] = useState("");
   const [rna, setRna] = useState("");
-  const [adresse, setAdresse] = useState("");
-  const [codePostale, setCodePostale] = useState("");
   const [ville, setVille] = useState("");
   const [numTel, setNumTel] = useState("");
   const [password, setPassword] = useState("");
-  const handleInputChange = (e) => {
-    const inputs = document.querySelectorAll(
-      "input[required], select[required]"
-    );
-    const isValid = Array.from(inputs).every((input) => input.checkValidity());
+  // const handleInputChange = (e) => {
+  //   const inputs = document.querySelectorAll(
+  //     "input[required], select[required]"
+  //   );
+  //   const isValid = Array.from(inputs).every((input) => input.checkValidity());
 
-    setFormIsValid(isValid);
-  };
+  //   setFormIsValid(isValid);
+  // };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   }
   const handleNomChange = (e) => {
     setNom(e.target.value);
   }
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  }
+
   const handleRxNationalChange = (e) => {
     setRxNational(e.target.value);
   }
+  
   const handleRnaChange = (e) => {
     setRna(e.target.value);
   }
-  const handleAdresseChange = (e) => {
-    setAdresse(e.target.value);
+  const handleVilleChange = (e) => {
+    setVille(e.target.value);
   }
   const handleTelephoneChange = (e) => {
     setNumTel(e.target.value);
@@ -60,30 +52,25 @@ const AssociationPage = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   }
-  const handleConfirmationChange = (e) => {
-    setConfirmation(e.target.value);
-  }
+ 
   const handleSubmit =async (e)=> {
     e.preventDefault();
-    const userData = {
+    const userDataAsso = {
       email : email,
       nom: nom,
-      description: description ,
+      description: "description" ,
       rxNational:rxNational ,
       rna: rna,
-      adresse: adresse,
-      codePostale: codePostale,
       ville: ville,
       numTel: numTel,
       password: password,
       isAsso: true
   }
-  dispatch(setFormData(userData));
 
   try {
-    // const response = await axios.post('http://localhost:8000/api/users', userData);
-      navigate('/WelcomeAsso'); // Redirection vers la page des bénévoles
-
+      console.log(userDataAsso);
+      sessionStorage.setItem('userDataAsso', JSON.stringify(userDataAsso));
+      navigate('/association2'); 
     // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
   } catch (error) {
     console.error('Erreur lors de l\'envoi du formulaire :', error);
@@ -178,6 +165,16 @@ const AssociationPage = () => {
             </Col>
           </Row>
         </div>
+        <div className="col-md-6">
+          <label htmlFor="inputmdp" className="form-label">
+            Mot de Passe
+          </label>
+          <input type="password" className="form-control" id="inputmdp" 
+          value={password}
+          onChange={handlePasswordChange} 
+          />
+        </div>
+
         <div className="col-md-4">
           <label htmlFor="adressse" className="form-label">
             Ville*
@@ -188,7 +185,7 @@ const AssociationPage = () => {
             className="form-control"
             placeholder="Entrez votre ville"
             required
-            onChange={handleAdresseChange}
+            onChange={handleVilleChange}
 
           />
         </div>
@@ -207,25 +204,14 @@ const AssociationPage = () => {
 
           />
         </div>
-
-        {/* <div className="col-12">
-          {formIsValid ? (
-            <Link to="/candidat2" style={buttonStyle}>
-              Next
-            </Link>
-          ) : (
-            <span
-              style={{ ...buttonStyle, pointerEvents: "none", opacity: 0.5 }}
-            >
-              Next
-            </span>
-          )}
-        </div> */}
         <div className="col-12">
           
-            <Link to="/candidat2" style={buttonStyle}>
-              Next
-            </Link>    
+        <button 
+            type="submit" 
+            style={buttonStyle} 
+            > 
+            Next
+          </button> 
         </div>
       </form>
     </div>

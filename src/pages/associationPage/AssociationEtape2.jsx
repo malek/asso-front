@@ -2,11 +2,12 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import addAvatar from "../../assets/add.png";
+import axios from "axios";
+
 const AssociationPage2 = () => {
+  const initialUserDataAsso = JSON.parse(sessionStorage.getItem('userDataAsso')) || {};
   const [formIsValid, setFormIsValid] = useState(false);
-  const [bio, setBio] = useState("");
-  const [subscribe, setSubscribe] = useState(false);
-  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [description, setDescription] = useState("");
 
   const buttonStyle = {
     backgroundColor: "#7C048E",
@@ -44,23 +45,35 @@ const AssociationPage2 = () => {
     // Implement logic to limit the bio to 50 words
     const words = inputBio.trim().split(/\s+/);
     if (words.length <= 100) {
-      setBio(inputBio);
+      setDescription(inputBio);
+    }
+  };
+  const ajouterAsso = async (finalUserDataAsso) => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/users', finalUserDataAsso);
+      // Gérer la réponse, par exemple en redirigeant l'utilisateur
+      // vers une autre page ou en affichant un message de succès
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de l\'utilisateur :', error);
+      // Gérer l'erreur, par exemple en affichant un message d'erreur
     }
   };
 
-  const handleSubscribeChange = () => {
-    setSubscribe(!subscribe);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const finalUserDataAsso = {
+      ...initialUserDataAsso,
+      description: description
+    };
+    ajouterAsso(finalUserDataAsso);
+    console.log("Données finales soumises:", finalUserDataAsso); // Afficher dans la console
+    
   };
-
-  const handleAgreeTermsChange = () => {
-    setAgreeTerms(!agreeTerms);
-  };
-
-
 
   return (
     <div className="container p-4">
-      <form className="row g-3" onChange={handleInputChange}>
+      <form className="row g-3" onSubmit={handleSubmit}>
         <div className="d-flex flex-column align-items-center mb-5 mt-5">
           <input
             type="file"
@@ -84,7 +97,7 @@ const AssociationPage2 = () => {
           <textarea
             id="bio"
             className="form-control"
-            value={bio}
+            value={description}
             onChange={handleBioChange}
             required
           />
@@ -96,8 +109,6 @@ const AssociationPage2 = () => {
               type="checkbox"
               className="form-check-input"
               id="subscribe"
-              checked={subscribe}
-              onChange={handleSubscribeChange}
             />
             <label className="form-check-label" htmlFor="subscribe">
               Je souhaite recevoir des actualités d'AssoShare et du monde
@@ -111,8 +122,6 @@ const AssociationPage2 = () => {
               type="checkbox"
               className="form-check-input"
               id="agreeTerms"
-              checked={agreeTerms}
-              onChange={handleAgreeTermsChange}
             />
             <label className="form-check-label" htmlFor="agreeTerms">
               J'ai lu et accepté les conditions d'utilisation de la plateforme
@@ -121,17 +130,9 @@ const AssociationPage2 = () => {
           </div>
         </div>
         <div className="col-12">
-          {formIsValid ? (
-            <Link to="/" style={buttonStyle}>
-              Finaliser
-            </Link>
-          ) : (
-            <span
-              style={{ ...buttonStyle, pointerEvents: "none", opacity: 0.5 }}
-            >
-              Finaliser
-            </span>
-          )}
+          <button type="submit" style={buttonStyle} >
+            Finaliser
+          </button>
         </div>
       </form>
     </div>
