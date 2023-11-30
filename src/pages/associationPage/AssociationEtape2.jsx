@@ -1,22 +1,36 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Button, ButtonGroup } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
-import addAvatar from "../../assets/add.png";
-const AssociationPage2 = () => {
-  const [formIsValid, setFormIsValid] = useState(false);
-  const [bio, setBio] = useState("");
-  const [subscribe, setSubscribe] = useState(false);
-  const [agreeTerms, setAgreeTerms] = useState(false);
 
+import addAvatar from "../../assets/inscription/addPicture.svg";
+import purpleButtomFlowers from "../../assets/inscription/purpleButtomFlowers.svg";
+
+const AssociationPage2 = () => {
+  const navigate = useNavigate();
   const buttonStyle = {
-    backgroundColor: "#7C048E",
+    backgroundColor: "#8675AA",
     padding: "10px 20px",
     textDecoration: "none",
     color: "white",
     display: "inline-block",
-    cursor: "pointer", // Add cursor style to indicate it's clickable
+    cursor: "pointer",
+    marginTop: "5%", // Change "margin-top" to marginTop
+    //marginLeft: "35%", // Change "margin-left" to marginLeft
+    fontFamily: "SuperTea", // Change "font-family" to fontFamily
+    position: "relative",
+    zIndex: 1,
+    borderRadius: "15px",
+  };
+  const imageStyle = {
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    width: "100%",
   };
 
+  const [formIsValid, setFormIsValid] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
@@ -28,23 +42,41 @@ const AssociationPage2 = () => {
     // Add logic to handle the selected file, e.g., upload it or display it
     console.log("Selected File:", selectedFile);
   };
-  const handleInputChange = (e) => {
-    // Perform validation or checks based on your requirements
-    // For simplicity, this example checks if all required fields have a value
-    const inputs = document.querySelectorAll(
-      "input[required], select[required]"
-    );
-    const isValid = Array.from(inputs).every((input) => input.checkValidity());
 
-    setFormIsValid(isValid);
+  const [nom, setNom] = useState("");
+  const [description, setDescription] = useState("");
+  const [subscribe, setSubscribe] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [selectedInterests, setSelectedInterests] = useState([]);
+
+  const toggleInterest = (interest) => {
+    if (selectedInterests.includes(interest)) {
+      setSelectedInterests(
+        selectedInterests.filter((item) => item !== interest)
+      );
+    } else {
+      setSelectedInterests([...selectedInterests, interest]);
+    }
   };
 
-  const handleBioChange = (e) => {
-    const inputBio = e.target.value;
-    // Implement logic to limit the bio to 50 words
-    const words = inputBio.trim().split(/\s+/);
+  const interests = [
+    "Loisir / Culture",
+    "Animaux",
+    "Éducation",
+    "Empoloi",
+    "Environnement",
+    "Solidarité / Insertion",
+    "Sport",
+    "Vivre-ensemble",
+    "Santé",
+  ];
+
+  const handleDescriptionChange = (e) => {
+    const inputDescription = e.target.value;
+    // Implement logic to limit the Description to 50 words
+    const words = inputDescription.trim().split(/\s+/);
     if (words.length <= 100) {
-      setBio(inputBio);
+      setDescription(inputDescription);
     }
   };
 
@@ -56,84 +88,329 @@ const AssociationPage2 = () => {
     setAgreeTerms(!agreeTerms);
   };
 
-  
+  useEffect(() => {
+    // Disable scrolling on mount
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
+    // Re-enable scrolling on unmount or component update
+    return () => {
+      document.documentElement.style.overflow = "auto";
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  useEffect(() => {
+    const isValid = nom && description;
+    setFormIsValid(isValid);
+
+    // Cleanup function for form validation useEffect
+  }, [nom, description, agreeTerms, subscribe]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Empêcher le rechargement de la page
+
+    if (!formIsValid) return;
+    const userData = {
+      nom: "nom",
+      description: "description",
+    };
+
+    try {
+      //  await axios.post('http://localhost:8000/api/users', userData);
+      navigate("/finalisationInscription"); // Redirection vers la page des bénévoles
+      // history.push("/candidat2");
+
+      // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
+    } catch (error) {
+      console.error("Erreur lors de l'envoi du formulaire :", error);
+      // Gérer l'erreur, par exemple en affichant un message d'erreur
+    }
+  };
+
+  const handleInputChange = (e) => {
+    // Perform validation or checks based on your requirements
+    // For simplicity, this example checks if all required fields have a value
+    const inputs = document.querySelectorAll(
+      "input[required], select[required]"
+    );
+    // const isValid = Array.from(inputs).every((input) => input.checkValidity());
+
+    //  setFormIsValid(isValid);
+    switch (e.target.id) {
+      case "nom":
+        setNom(e.target.value);
+        break;
+      case "description":
+        handleDescriptionChange(e);
+        break;
+    }
+    // Vérifier si le formulaire est valide
+    const isValid = Array.from(
+      document.querySelectorAll("input[required], select[required]")
+    ).every((input) => input.checkValidity());
+    setFormIsValid(isValid);
+  };
+
+  const purpleDivStyle = {
+    background: "#8675AA",
+    color: "white",
+    borderRadius: "0 0 18% 18%",
+    letterSpacing: "2px",
+    fontFamily: "'SuperTea', sans-serif",
+    marginTop: "-10%",
+  };
 
   return (
-    <div className="container p-4">
-      <form className="row g-3" onChange={handleInputChange}>
-        <div className="d-flex flex-column align-items-center mb-5 mt-5">
-          <input
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            ref={fileInputRef}
-            onChange={handleFileChange}
-          />
-          <Image
-            src={addAvatar}
-            roundedCircle
-            onClick={handleImageClick}
-            //style={buttonStyle}
-          />
-          <label>Ajouter une photo</label>
-        </div>
-        <div className="col-12">
-          <label htmlFor="bio" className="form-label">
-            Bio (max 100 words)*
-          </label>
-          <textarea
-            id="bio"
-            className="form-control"
-            value={bio}
-            onChange={handleBioChange}
-            required
-          />
+    <div>
+      <Row>
+        <div style={purpleDivStyle}>
+          <div className="d-flex flex-column align-items-center mb-5 mt-5">
+            <p className="fs-3" style={{ marginTop: "5%" }}>
+              JE SUIS UNE ASSO !
+            </p>
+            <p className="fs-3" style={{ marginBottom: "-5%" }}>
+              ÉTAPE 2
+            </p>
+          </div>
         </div>
 
-        <div className="col-12">
-          <div className="form-check">
+        <div className="container p-4">
+          <div className="d-flex flex-column align-items-center mb-5 mt-5">
             <input
-              type="checkbox"
-              className="form-check-input"
-              id="subscribe"
-              checked={subscribe}
-              onChange={handleSubscribeChange}
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={handleFileChange}
             />
-            <label className="form-check-label" htmlFor="subscribe">
-              Je souhaite recevoir des actualités d'AssoShare et du monde
-              associatif.
-            </label>
-          </div>
-        </div>
-        <div className="col-12">
-          <div className="form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="agreeTerms"
-              checked={agreeTerms}
-              onChange={handleAgreeTermsChange}
+            <Image
+              src={addAvatar}
+              roundedCircle
+              onClick={handleImageClick}
+              style={{ marginTop: "-15%" }}
             />
-            <label className="form-check-label" htmlFor="agreeTerms">
-              J'ai lu et accepté les conditions d'utilisation de la plateforme
-              Assoshare ainsi que le traitement du dossier.
-            </label>
           </div>
-        </div>
-        <div className="col-12">
-          {formIsValid ? (
-            <Link to="/" style={buttonStyle}>
-              Finaliser
-            </Link>
-          ) : (
-            <span
-              style={{ ...buttonStyle, pointerEvents: "none", opacity: 0.5 }}
+
+          <Row className="justify-content-center">
+            <Col>
+              {["Loisir / Culture", "Animaux", "Éducation"].map(
+                (interest, index) => (
+                  <Button
+                    key={interest}
+                    variant={
+                      selectedInterests.includes(interest)
+                        ? "primary"
+                        : "outline-primary"
+                    }
+                    onClick={() => toggleInterest(interest)}
+                    className="mb-2"
+                    style={{
+                      backgroundColor: selectedInterests.includes(interest)
+                        ? "#8675AA"
+                        : "white",
+                      color: selectedInterests.includes(interest)
+                        ? "white"
+                        : "black",
+                      borderRadius: "15px",
+                      margin: "4px", // Ajout d'un petit espace
+                      border: "none", // Suppression de la couleur de la bordure
+                      marginTop: "-15%",
+                    }}
+                  >
+                    {interest}
+                  </Button>
+                )
+              )}
+            </Col>
+          </Row>
+
+          <Row className="justify-content-center">
+            <Col>
+              {["Emploi", "Environnement", "Solidarité/Insertion"].map(
+                (interest, index) => (
+                  <Button
+                    key={interest}
+                    variant={
+                      selectedInterests.includes(interest)
+                        ? "primary"
+                        : "outline-primary"
+                    }
+                    onClick={() => toggleInterest(interest)}
+                    className="mb-2"
+                    style={{
+                      backgroundColor: selectedInterests.includes(interest)
+                        ? "#8675AA"
+                        : "white",
+                      color: selectedInterests.includes(interest)
+                        ? "white"
+                        : "black",
+                      borderRadius: "15px",
+                      margin: "4px", // Ajout d'un petit espace
+                      border: "none", // Suppression de la couleur de la bordure
+                      marginTop: "-5%",
+                    }}
+                  >
+                    {interest}
+                  </Button>
+                )
+              )}
+            </Col>
+          </Row>
+
+          <Row className="justify-content-center">
+            <Col>
+              {["Sport", "Vivre-ensemble", "Santé"].map((interest, index) => (
+                <Button
+                  key={interest}
+                  variant={
+                    selectedInterests.includes(interest)
+                      ? "primary"
+                      : "outline-primary"
+                  }
+                  onClick={() => toggleInterest(interest)}
+                  className="mb-2"
+                  style={{
+                    backgroundColor: selectedInterests.includes(interest)
+                      ? "#8675AA"
+                      : "white",
+                    color: selectedInterests.includes(interest)
+                      ? "white"
+                      : "black",
+                    borderRadius: "15px",
+                    margin: "4px", // Ajout d'un petit espace
+                    border: "none", // Suppression de la couleur de la bordure
+                  }}
+                >
+                  {interest}
+                </Button>
+              ))}
+            </Col>
+          </Row>
+
+          <form className="row g-2" onSubmit={handleSubmit}>
+            <Row>
+              <label htmlFor="nom" className="form-label" style={{marginTop: "5%",}}>
+                Le nom de mon association :
+              </label>
+            </Row>
+            <Row xs={5} md={5}>
+              <input
+                type="text"
+                className="form-control"
+                id="nom"
+                value={nom}
+                onChange={handleInputChange}
+                style={{
+                  borderRadius: "15px",
+                }}
+                required
+              />
+            </Row>
+
+            <Row>
+              <label
+                htmlFor="description"
+                className="form-label"
+                style={{
+                  marginTop: "10px",
+                }}
+              >
+                Courte description :
+              </label>{" "}
+            </Row>
+            <Row>
+              <textarea
+                id="description"
+                placeholder="50 MOTS MAX"
+                className="form-control"
+                value={description}
+                style={{
+                  borderRadius: "15px",
+                  resize: "none",
+                }}
+                onChange={handleInputChange}
+                required
+              />
+            </Row>
+            <Row
+              style={{
+                marginTop: "10px",
+              }}
             >
-              Finaliser
-            </span>
-          )}
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="subscribe"
+                  checked={subscribe}
+                  onChange={handleSubscribeChange}
+                />
+                <label className="form-check-label" htmlFor="subscribe">
+                  Je souhaite recevoir des actualités d'AssoShare et du monde
+                  associatif.
+                </label>
+              </div>
+            </Row>
+            <Row
+              style={{
+                marginTop: "10px",
+              }}
+            >
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="agreeTerms"
+                  checked={agreeTerms}
+                  onChange={handleAgreeTermsChange}
+                  required
+                />
+                <label className="form-check-label" htmlFor="agreeTerms">
+                  J'ai lu et accepté les conditions d'utilisation de la
+                  plateforme Assoshare ainsi que le traitement du dossier.
+                </label>
+              </div>
+            </Row>
+            <Row>
+              <div
+                className="col-12"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {formIsValid ? (
+                  <button
+                    type="submit"
+                    style={buttonStyle}
+                    disabled={!formIsValid}
+                    onClick={handleSubmit}
+                  >
+                    VALIDATION
+                  </button>
+                ) : (
+                  <span
+                    style={{
+                      ...buttonStyle,
+                      pointerEvents: "none",
+                      opacity: 0.5,
+                    }}
+                  >
+                    VALIDATION
+                  </span>
+                )}
+              </div>
+            </Row>
+          </form>
         </div>
-      </form>
+      </Row>
+      <img
+        src={purpleButtomFlowers}
+        alt="purpleButtomFlowers"
+        style={imageStyle}
+      />
     </div>
   );
 };

@@ -39,11 +39,14 @@ const LoginPage = () => {
         </form>
       </div>
       <div className="d-flex flex-column align-items-center mb-5 mt-5">
-      <h1 className="fs-4">
-      Vous n'avez pas de compte ?{" "}
-        <Link to="/" style={lienStyle}> Inscrivez-vous sur AssoShare.</Link>
-      </h1>
-    </div>
+        <h1 className="fs-4">
+          Vous n'avez pas de compte ?{" "}
+          <Link to="/" style={lienStyle}>
+            {" "}
+            Inscrivez-vous sur AssoShare.
+          </Link>
+        </h1>
+      </div>
     </div>
   );
 };
