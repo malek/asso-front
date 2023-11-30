@@ -3,7 +3,11 @@
 @font-face {
   font-family: 'SuperTea'; /* You can name it whatever you want */
   src: url('./assets/fonts/Supertea.otf') format('opentype');
-  /* Add other font formats here if needed */
+}
+
+@font-face {
+  font-family: 'RobotoFlex'; /* You can name it whatever you want */
+  src: url('./assets/fonts/RobotoFlexRegular.ttf') format('opentype');
 }
 
 #root {
@@ -12,10 +16,20 @@
   margin: 0;
   padding: 0;
 }
-h1 {
-  font-family: 'SuperTea', sans-serif; /* Use the custom font */
+h1,h2 {
+  
+  font-family: 'SuperTea', sans-serif; 
+  
 }
+
 body {
-  font-family: 'SuperTea', sans-serif;
-  font-weight: 400;
+   font-family: 'RobotoFlex', sans-serif;  
+   font-weight: bold;
+   background-color: #E5D2EC;
+}
+
+.btnText{
+  font-family: 'SuperTea', sans-serif; 
+   font-weight: 400; 
+   letter-spacing: 1px;
 }

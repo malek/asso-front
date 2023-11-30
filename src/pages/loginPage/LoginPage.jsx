@@ -63,7 +63,14 @@ const LoginPage = () => {
       <div className="d-flex flex-column align-items-center mb-5 mt-5">
         <h1 className="fs-4">
           Vous n'avez pas de compte ?{" "}
+<<<<<<< HEAD
           <Link to="/inscription" style={lienStyle}>Inscrivez-vous sur AssoShare.</Link>
+=======
+          <Link to="/" style={lienStyle}>
+            {" "}
+            Inscrivez-vous sur AssoShare.
+          </Link>
+>>>>>>> 5866dd3e1c776ba90b67ecf9d5a8eaefcd4e8ca5
         </h1>
       </div>
     </div>
