@@ -78,7 +78,7 @@ const CandidatePage2 = () => {
   }, []);
 
   useEffect(() => {
-    const isValid = nom && prenom && description;
+    const isValid = nom && prenom && description && agreeTerms;
     setFormIsValid(isValid);
 
     // Cleanup function for form validation useEffect

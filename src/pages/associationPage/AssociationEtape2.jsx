@@ -101,7 +101,7 @@ const AssociationPage2 = () => {
   }, []);
 
   useEffect(() => {
-    const isValid = nom && description;
+    const isValid = nom && description && agreeTerms;
     setFormIsValid(isValid);
 
     // Cleanup function for form validation useEffect
@@ -290,7 +290,11 @@ const AssociationPage2 = () => {
 
           <form className="row g-2" onSubmit={handleSubmit}>
             <Row>
-              <label htmlFor="nom" className="form-label" style={{marginTop: "5%",}}>
+              <label
+                htmlFor="nom"
+                className="form-label"
+                style={{ marginTop: "5%" }}
+              >
                 Le nom de mon association :
               </label>
             </Row>
