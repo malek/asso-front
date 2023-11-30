@@ -6,9 +6,6 @@ import addAvatar from "../../assets/add.png";
 const AssociationPage2 = () => {
   const [formIsValid, setFormIsValid] = useState(false);
   const [bio, setBio] = useState("");
-  const [subscribe, setSubscribe] = useState(false);
-  const [agreeTerms, setAgreeTerms] = useState(false);
-
   const buttonStyle = {
     backgroundColor: "#8675AA",
     padding: "10px 20px",
