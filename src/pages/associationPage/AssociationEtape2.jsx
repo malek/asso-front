@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import addAvatar from "../../assets/add.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AssociationPage2 = () => {
+  const navigate = useNavigate();
   const initialUserDataAsso = JSON.parse(sessionStorage.getItem('userDataAsso')) || {};
   const [formIsValid, setFormIsValid] = useState(false);
   const [description, setDescription] = useState("");
@@ -17,7 +18,6 @@ const AssociationPage2 = () => {
     display: "inline-block",
     cursor: "pointer", // Add cursor style to indicate it's clickable
   };
-
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
@@ -53,6 +53,9 @@ const AssociationPage2 = () => {
       const response = await axios.post('http://localhost:8000/api/users', finalUserDataAsso);
       // Gérer la réponse, par exemple en redirigeant l'utilisateur
       // vers une autre page ou en affichant un message de succès
+      // Remplacez par le chemin de votre page
+
+
     } catch (error) {
       console.error('Erreur lors de l\'ajout de l\'utilisateur :', error);
       // Gérer l'erreur, par exemple en affichant un message d'erreur
@@ -68,7 +71,8 @@ const AssociationPage2 = () => {
     };
     ajouterAsso(finalUserDataAsso);
     console.log("Données finales soumises:", finalUserDataAsso); // Afficher dans la console
-    
+    navigate('/Welcome'); 
+
   };
 
   return (

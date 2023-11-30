@@ -2,9 +2,11 @@ import React, { useRef, useState } from "react";
 import Image from "react-bootstrap/Image";
 import addAvatar from "../../assets/add.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const CandidatePage2 = () => {
-
+  const navigate = useNavigate();
   const initialUserData = JSON.parse(sessionStorage.getItem('userData')) || {};
   const [description, setDescription] = useState(initialUserData.nom || "");
   const [nom, setNom] = useState(initialUserData.prenom || "");
@@ -70,6 +72,7 @@ const CandidatePage2 = () => {
     };
     ajouterUtilisateur(finalUserData);
     console.log("Données finales soumises:", finalUserData); // Afficher dans la console
+    navigate('/Welcome'); 
     
   };
   const ajouterUtilisateur = async (finalUserData) => {
