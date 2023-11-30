@@ -69,14 +69,12 @@ const AssociationPage = () => {
       password &&
       rxNational &&
       rna &&
-      adresse &&
-      codePostale &&
       ville &&
       numTel;
     setFormIsValid(isValid);
 
     // Cleanup function for form validation useEffect
-  }, [email, password, rxNational, rna, adresse, codePostale, ville, numTel]);
+  }, [email, password, rxNational, rna, ville, numTel]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,8 +85,7 @@ const AssociationPage = () => {
 
       rxNational: rxNational,
       rna: rna,
-      adresse: adresse,
-      codePostale: codePostale,
+
       ville: ville,
       numTel: numTel,
       password: password,
@@ -337,7 +334,7 @@ const AssociationPage = () => {
         >
           <button style={annulerButtonStyle}>
             <Link
-              to="/landing"
+              to="/"
               style={{ color: "white", textDecoration: "none" }}
             >
               RETOUR

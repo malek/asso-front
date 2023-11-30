@@ -48,7 +48,7 @@ const FinalisationInscription = () => {
 
     try {
       //  await axios.post('http://localhost:8000/api/users', userData);
-      navigate("/landing"); // Redirection vers la page des bénévoles
+      navigate("/"); // Redirection vers la page des bénévoles
       // history.push("/candidat2");
 
       // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès

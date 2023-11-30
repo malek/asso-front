@@ -86,7 +86,7 @@ const CandidatePage = () => {
       ville: ville,
       numTel: numTel,
       description: "description",
-      isBenevole: isBenevole === "Bénévole", // Assurez-vous que cette logique correspond à votre besoin
+     // isBenevole: isBenevole === "Bénévole", // Assurez-vous que cette logique correspond à votre besoin
     };
     try {
       //  await axios.post('http://localhost:8000/api/users', userData);
@@ -340,7 +340,7 @@ const CandidatePage = () => {
         >
           <button style={annulerButtonStyle}>
             <Link
-              to="/landing"
+              to="/"
               style={{ color: "white", textDecoration: "none" }}
             >
               RETOUR
