@@ -40,7 +40,7 @@ const Landing = () => {
 
   const purpleButtomFlowersStyle = {
     position: "fixed",
-    bottom: 10,
+    bottom: 0,
     left: 0,
     width: "100%",
     zIndex: 1,

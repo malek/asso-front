@@ -6,6 +6,7 @@ import AssociationPage from "../pages/associationPage/AssociationPage";
 import AssociationPage2 from "../pages/associationPage/AssociationEtape2";
 import LoginPage from "../pages/loginPage/LoginPage";
 import FinalisationInscription from "../pages/candidatePage/FinalisationInscription";
+import Feed from "../pages/feedPage/Feed";
 
 const HomeRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const HomeRoutes = () => {
       <Route path="/association" element={<AssociationPage />} />
       <Route path="/association2" element={<AssociationPage2 />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/feed" element={<Feed />} />
     </Routes>
   );
 };
