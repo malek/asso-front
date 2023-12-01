@@ -42,15 +42,12 @@ const CandidatePage = () => {
   };
 
   const [formIsValid, setFormIsValid] = useState(false);
-  const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [dateNaissance, setDateNaissance] = useState("");
   const [ville, setVille] = useState("");
   const [numTel, setNumTel] = useState("");
-  // const [description, setDescription] = useState("");
-  //const [isBenevole, setIsBenevole] = useState("");
+  const [isBenevole, setIsBenevole] = useState(false);
 
   useEffect(() => {
     // Disable scrolling on mount
@@ -65,12 +62,11 @@ const CandidatePage = () => {
   }, []);
 
   useEffect(() => {
-    const isValid =
-      email && password && dateNaissance && ville && numTel && role;
+    const isValid = email && password && 
+                    dateNaissance && ville && numTel;
     setFormIsValid(isValid);
-
-    // Cleanup function for form validation useEffect
-  }, [email, password, dateNaissance, ville, numTel, role]);
+  }, [email, password, dateNaissance, ville, numTel]);
+ 
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Empêcher le rechargement de la page
@@ -86,12 +82,13 @@ const CandidatePage = () => {
       ville: ville,
       numTel: numTel,
       description: "description",
-     // isBenevole: isBenevole === "Bénévole", // Assurez-vous que cette logique correspond à votre besoin
+      isBenevole: isBenevole // Assurez-vous que cette logique correspond à votre besoin
     };
     try {
       //  await axios.post('http://localhost:8000/api/users', userData);
-      navigate("/candidat2"); // Redirection vers la page des bénévoles
-      // history.push("/candidat2");
+      console.log(userData);
+      sessionStorage.setItem('userData', JSON.stringify(userData));
+      navigate('/candidat2'); // Redirection vers la page des bénévoles
 
       // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
     } catch (error) {
@@ -106,6 +103,12 @@ const CandidatePage = () => {
     const inputs = document.querySelectorAll(
       "input[required], select[required]"
     );
+    if (e.target.id === 'benevole') {
+      setIsBenevole(true);
+    } else if (e.target.id === 'participant') {
+      setIsBenevole(false);
+    }
+  
     // const isValid = Array.from(inputs).every((input) => input.checkValidity());
 
     // setFormIsValid(isValid);
@@ -117,10 +120,7 @@ const CandidatePage = () => {
       case "inputmdp":
         setPassword(e.target.value);
         break;
-      case "benevole":
-        setRole(e.target.value);
-        break;
-      case "dob":
+      case 'dob':
         setDateNaissance(e.target.value);
         break;
       case "ville":
@@ -129,8 +129,8 @@ const CandidatePage = () => {
       case "numTel":
         setNumTel(e.target.value);
         break;
-    }
-
+  };
+ 
     // Vérifier si le formulaire est valide
     const isValid = Array.from(
       document.querySelectorAll("input[required], select[required]")
@@ -161,7 +161,7 @@ const CandidatePage = () => {
             <div className="col-12">
               <Row>
                 <Col xs={4} md={4} style={{ marginLeft: "10px" }}>
-                  <label htmlFor="inputState" className="form-label">
+                  <label  className="form-label">
                     Je veux :
                   </label>
                 </Col>
@@ -174,7 +174,7 @@ const CandidatePage = () => {
                         id="participant"
                         name="role"
                         value="participant"
-                        checked={role === "participant"}
+                        checked={isBenevole === false}
                         onChange={handleInputChange}
                       />
                       <label className="form-check-label" htmlFor="participant">
@@ -190,7 +190,7 @@ const CandidatePage = () => {
                         id="benevole"
                         name="role"
                         value="benevole"
-                        checked={role === "benevole"}
+                        checked={isBenevole === true}
                         onChange={handleInputChange}
                       />
                       <label className="form-check-label" htmlFor="benevole">

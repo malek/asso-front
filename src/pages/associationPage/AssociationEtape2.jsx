@@ -7,8 +7,15 @@ import Image from "react-bootstrap/Image";
 import addAvatar from "../../assets/inscription/addPicture.svg";
 import purpleButtomFlowers from "../../assets/inscription/purpleButtomFlowers.svg";
 
+import axios from "axios";
+
 const AssociationPage2 = () => {
   const navigate = useNavigate();
+  const initialUserDataAsso = JSON.parse(sessionStorage.getItem('userDataAsso')) || {};
+  const [formIsValid, setFormIsValid] = useState(false);
+  const [description, setDescription] = useState("");
+  const [nom,setNom]= useState("");
+
   const buttonStyle = {
     backgroundColor: "#8675AA",
     padding: "10px 20px",
@@ -30,7 +37,6 @@ const AssociationPage2 = () => {
     width: "100%",
   };
 
-  const [formIsValid, setFormIsValid] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
@@ -43,8 +49,6 @@ const AssociationPage2 = () => {
     console.log("Selected File:", selectedFile);
   };
 
-  const [nom, setNom] = useState("");
-  const [description, setDescription] = useState("");
   const [subscribe, setSubscribe] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [selectedInterests, setSelectedInterests] = useState([]);
@@ -79,6 +83,43 @@ const AssociationPage2 = () => {
       setDescription(inputDescription);
     }
   };
+  const ajouterAsso = async (finalUserDataAsso) => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/users', finalUserDataAsso);
+      // Gérer la réponse, par exemple en redirigeant l'utilisateur
+      // vers une autre page ou en affichant un message de succès
+      // Remplacez par le chemin de votre page
+
+
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de l\'utilisateur :', error);
+      // Gérer l'erreur, par exemple en affichant un message d'erreur
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const finalUserDataAsso = {
+      ...initialUserDataAsso,
+      description: description,
+      nom : nom
+    };
+    if (!formIsValid) return;
+    const userData = {
+      nom: "nom",
+      description: "description",
+    };
+    try{
+    ajouterAsso(finalUserDataAsso);
+    console.log("Données finales soumises:", finalUserDataAsso); // Afficher dans la console
+    navigate("/finalisationInscription"); }
+    catch (error) {
+      console.error("Erreur lors de l'envoi du formulaire :", error);
+      // Gérer l'erreur, par exemple en affichant un message d'erreur
+    }
+
+  };
 
   const handleSubscribeChange = () => {
     setSubscribe(!subscribe);
@@ -107,26 +148,6 @@ const AssociationPage2 = () => {
     // Cleanup function for form validation useEffect
   }, [nom, description, agreeTerms, subscribe]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // Empêcher le rechargement de la page
-
-    if (!formIsValid) return;
-    const userData = {
-      nom: "nom",
-      description: "description",
-    };
-
-    try {
-      //  await axios.post('http://localhost:8000/api/users', userData);
-      navigate("/finalisationInscription"); // Redirection vers la page des bénévoles
-      // history.push("/candidat2");
-
-      // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
-    } catch (error) {
-      console.error("Erreur lors de l'envoi du formulaire :", error);
-      // Gérer l'erreur, par exemple en affichant un message d'erreur
-    }
-  };
 
   const handleInputChange = (e) => {
     // Perform validation or checks based on your requirements
@@ -416,7 +437,6 @@ const AssociationPage2 = () => {
         style={imageStyle}
       />
     </div>
-  );
-};
+  );}
 
 export default AssociationPage2;

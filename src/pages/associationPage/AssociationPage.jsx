@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-
 import purpleButtomFlowers from "../../assets/inscription/purpleButtomFlowers.svg";
 
 const AssociationPage = () => {
-  const navigate = useNavigate();
   const buttonStyle = {
     backgroundColor: "#8675AA",
     padding: "10px 20px",
@@ -38,15 +35,21 @@ const AssociationPage = () => {
     width: "100%",
     zIndex: -1,
   };
+  const purpleDivStyle = {
+    background: "#8675AA",
+    color: "white",
+    borderRadius: "0 0 18% 18%",
+    letterSpacing: "2px",
+    fontFamily: "'SuperTea', sans-serif",
+    marginTop : "-10%"
+    
+  };
+  const navigate = useNavigate();
 
   const [formIsValid, setFormIsValid] = useState(false);
-
   const [email, setEmail] = useState("");
-
   const [rxNational, setRxNational] = useState("");
   const [rna, setRna] = useState("");
-  const [adresse, setAdresse] = useState("");
-  const [codePostale, setCodePostale] = useState("");
   const [ville, setVille] = useState("");
   const [numTel, setNumTel] = useState("");
   const [password, setPassword] = useState("");
@@ -66,84 +69,81 @@ const AssociationPage = () => {
   useEffect(() => {
     const isValid =
       email &&
-      password &&
       rxNational &&
       rna &&
       ville &&
-      numTel;
+      numTel &&
+      password
     setFormIsValid(isValid);
 
     // Cleanup function for form validation useEffect
   }, [email, password, rxNational, rna, ville, numTel]);
 
-  const handleSubmit = async (e) => {
+  
+  const handleInputChange = (e) => {
+     const inputs = document.querySelectorAll(
+      "input[required], select[required]"
+    );
+  
+  switch (e.target.id) {
+    case "email":
+      setEmail(e.target.value);
+      break;
+    case "reseau": // Assurez-vous que l'ID est correct dans le JSX
+      setRxNational(e.target.value);
+      break;
+    case "rna":
+      setRna(e.target.value);
+      break;
+    case "ville":
+      setVille(e.target.value);
+      break;
+    case "telephone": // Assurez-vous que l'ID est correct dans le JSX
+      setNumTel(e.target.value);
+      break;
+    case "inputmdp": // Assurez-vous que l'ID est correct dans le JSX
+      setPassword(e.target.value);
+      break;
+  
+  }
+   
+  const isValid = Array.from(
+    document.querySelectorAll("input[required], select[required]")
+  ).every((input) => input.checkValidity());
+
+    setFormIsValid(isValid);
+
+  };
+ 
+  const handleSubmit =async (e)=> {
+    
     e.preventDefault();
     if (!formIsValid) return;
 
-    const userData = {
-      email: email,
+    const userDataAsso = {
+      email : email,
 
-      rxNational: rxNational,
+      description: "description" ,
+      rxNational:rxNational ,
       rna: rna,
-
       ville: ville,
       numTel: numTel,
       password: password,
-    };
-    try {
-      // const response = await axios.post('http://localhost:8000/api/users', userData);
-      navigate("/association2"); // Redirection vers la page des bénévoles
-
-      // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
-    } catch (error) {
-      console.error("Erreur lors de l'envoi du formulaire :", error);
-      // Gérer l'erreur, par exemple en affichant un message d'erreur
-    }
+      isAsso: true
   };
 
-  const handleInputChange = (e) => {
-    const inputs = document.querySelectorAll(
-      "input[required], select[required]"
-    );
-    //const isValid = Array.from(inputs).every((input) => input.checkValidity());
-
-    //setFormIsValid(isValid);
-
-    switch (e.target.id) {
-      case "reseau":
-        setRxNational(e.target.value);
-        break;
-      case "rna":
-        setRna(e.target.value);
-        break;
-      case "email":
-        setEmail(e.target.value);
-        break;
-      case "inputmdp":
-        setPassword(e.target.value);
-        break;
-      case "ville":
-        setVille(e.target.value);
-        break;
-      case "telephone":
-        setNumTel(e.target.value);
-        break;
-    }
-    // Vérifier si le formulaire est valide
-    const isValid = Array.from(
-      document.querySelectorAll("input[required], select[required]")
-    ).every((input) => input.checkValidity());
-    setFormIsValid(isValid);
-  };
-
-  const purpleDivStyle = {
-    background: "#8675AA",
-    color: "white",
-    borderRadius: "0 0 18% 18%",
-    letterSpacing: "2px",
-    fontFamily: "'SuperTea', sans-serif",
-    marginTop: "-10%",
-  };
+  try {
+      console.log(userDataAsso);
+      sessionStorage.setItem('userDataAsso', JSON.stringify(userDataAsso));
+      navigate('/association2'); 
+    // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi du formulaire :', error);
+    // Gérer l'erreur, par exemple en affichant un message d'erreur
+  }
+}
+  
+  
   return (
     <div>
       <Row>
@@ -265,6 +265,7 @@ const AssociationPage = () => {
                 type="password"
                 className="form-control"
                 id="inputmdp"
+                required
                 value={password}
                 onChange={handleInputChange}
                 style={{
