@@ -1,26 +1,34 @@
-import React, { useRef, useState } from "react";
-import Image from "react-bootstrap/Image";
-import addAvatar from "../../assets/add.png";
-import axios from "axios";
+import React, { useRef, useState, useEffect } from "react";
+import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
+import Image from "react-bootstrap/Image";
+import axios from "axios";
+import addAvatar from "../../assets/inscription/addPicture.svg";
+import purpleButtomFlowers from "../../assets/inscription/purpleButtomFlowers.svg";
 
 const CandidatePage2 = () => {
   const navigate = useNavigate();
-  const initialUserData = JSON.parse(sessionStorage.getItem('userData')) || {};
-  const [description, setDescription] = useState(initialUserData.nom || "");
-  const [nom, setNom] = useState(initialUserData.prenom || "");
-  const [prenom, setPrenom] = useState(initialUserData.description || "");
-
   const buttonStyle = {
-    backgroundColor: "#7C048E",
+    backgroundColor: "#8675AA",
     padding: "10px 20px",
     textDecoration: "none",
     color: "white",
     display: "inline-block",
-    cursor: "pointer", // Add cursor style to indicate it's clickable
+    cursor: "pointer",
+    marginTop: "5%", 
+    fontFamily: "SuperTea", 
+    position: "relative",
+    zIndex: 1,
+    borderRadius: "15px",
+  };
+  const imageStyle = {
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    width: "100%",
   };
 
+  const [formIsValid, setFormIsValid] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
@@ -33,34 +41,77 @@ const CandidatePage2 = () => {
     console.log("Selected File:", selectedFile);
   };
 
+   const [subscribe, setSubscribe] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const initialUserData = JSON.parse(sessionStorage.getItem('userData')) || {};
+  const [description, setDescription] = useState( "");
+  const [nom, setNom] = useState( "");
+  const [prenom, setPrenom] = useState( "");
 
- 
-
-  const handleBioChange = (e) => {
-    const inputBio = e.target.value;
-    // Implement logic to limit the bio to 50 words
-    const words = inputBio.trim().split(/\s+/);
+  const handleDescriptionChange = (e) => {
+    const inputDescription = e.target.value;
+    // Implement logic to limit the description to 50 words
+    const words = inputDescription.trim().split(/\s+/);
     if (words.length <= 50) {
-      setDescription(inputBio);
+      setDescription(inputDescription);
     }
   };
 
-  const handleNomChange = (e) => {
-    setNom(e.target.value);
+  useEffect(() => {
+    // Disable scrolling on mount
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
+    // Re-enable scrolling on unmount or component update
+    return () => {
+      document.documentElement.style.overflow = "auto";
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  useEffect(() => {
+    const isValid = nom && prenom && description && agreeTerms;
+    setFormIsValid(isValid);
+
+    // Cleanup function for form validation useEffect
+  }, [nom, prenom, description, agreeTerms, subscribe]);
+
+  const handleInputChange = (e) => {
+    // Perform validation or checks based on your requirements
+    // For simplicity, this example checks if all required fields have a value
+    const inputs = document.querySelectorAll(
+      "input[required], select[required]"
+    );
+    //const isValid = Array.from(inputs).every((input) => input.checkValidity());
+
+    //setFormIsValid(isValid);
+    switch (e.target.id) {
+      case "nom":
+        setNom(e.target.value);
+        break;
+      case "prenom":
+        setPrenom(e.target.value);
+        break;
+      case "description":
+        handleDescriptionChange(e);
+        break;
+    }
+
+    // Vérifier si le formulaire est valide
+    const isValid = Array.from(
+      document.querySelectorAll("input[required], select[required]")
+    ).every((input) => input.checkValidity());
+    //   setFormIsValid(isValid);
+// };
+ 
+  }
+  const handleSubscribeChange = () => {
+    setSubscribe(!subscribe);
   };
 
-  const handlePrenomChange = (e) => {
-    setPrenom(e.target.value);
+  const handleAgreeTermsChange = () => {
+    setAgreeTerms(!agreeTerms);
   };
-
-  // const handleInputChange = (e) => {
-  //   // Perform validation or checks based on your requirements
-  //   // For simplicity, this example checks if all required fields have a value
-  //   const inputs = document.querySelectorAll("input[required], select[required]");
-  //   const isValid = Array.from(inputs).every((input) => input.checkValidity());
-
-  //   setFormIsValid(isValid);
-  // };
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -72,7 +123,7 @@ const CandidatePage2 = () => {
     };
     ajouterUtilisateur(finalUserData);
     console.log("Données finales soumises:", finalUserData); // Afficher dans la console
-    navigate('/Welcome'); 
+    navigate('/finalisationInscription'); 
     
   };
   const ajouterUtilisateur = async (finalUserData) => {
@@ -86,91 +137,184 @@ const CandidatePage2 = () => {
     }
   };
 
+  const purpleDivStyle = {
+    background: "#8675AA",
+    color: "white",
+    borderRadius: "0 0 18% 18%",
+    letterSpacing: "2px",
+    fontFamily: "'SuperTea', sans-serif",
+    marginTop: "-10%",
+  };
+
   return (
-    <div className="container p-4">
-      <div className="d-flex flex-column align-items-center mb-5 mt-5">
-        <input
-          type="file"
-          accept="image/*"
-          style={{ display: "none" }}
-          ref={fileInputRef}
-          onChange={handleFileChange}
-        />
-        <Image
-          src={addAvatar}
-          roundedCircle
-          onClick={handleImageClick}
-          style={buttonStyle}
-        />
-        <label>Ajouter une photo</label>
-      </div>
-      <form className="row g-3" onSubmit={handleSubmit}>
-        <div className="col-md-6">
-          <label htmlFor="nom" className="form-label">
-            Nom*
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="nom"
-            onChange={handleNomChange}
-            required
-          />
-        </div>
-        <div className="col-md-6">
-          <label htmlFor="prenom" className="form-label">
-            Prénom*
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="prenom"
-            onChange={handlePrenomChange}
-            required
-          />
-        </div>
-        <div className="col-12">
-          <label htmlFor="bio" className="form-label">
-            Bio (max 50 words)*
-          </label>
-          <textarea
-            id="bio"
-            className="form-control"
-            value={description}
-            onChange={handleBioChange}
-            required
-          />
-        </div>
-        <div className="col-12">
-          <div className="form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="subscribe"
-            />
-            <label className="form-check-label" htmlFor="subscribe">
-            Je souhaite recevoir des actualités d'AssoShare et du monde associatif.
-            </label>
+    <div>
+      <Row>
+        <div style={purpleDivStyle}>
+          <div className="d-flex flex-column align-items-center mb-5 mt-5">
+            <p className="fs-3" style={{ marginTop: "5%" }}>
+              JE SUIS PARTICIPANT!
+            </p>
+            <p className="fs-3" style={{ marginBottom: "-5%" }}>
+              ÉTAPE 2
+            </p>
           </div>
         </div>
-        <div className="col-12">
-          <div className="form-check">
+
+        <div className="container p-4">
+          <div className="d-flex flex-column align-items-center mb-5 mt-5">
             <input
-              type="checkbox"
-              className="form-check-input"
-              id="agreeTerms"
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={handleFileChange}
             />
-            <label className="form-check-label" htmlFor="agreeTerms">
-            J'ai lu et accepté les conditions d'utilisation de la plateforme Assoshare ainsi que le traitement du dossier.
-            </label>
+            <Image
+              src={addAvatar}
+              roundedCircle
+              onClick={handleImageClick}
+              style={{ marginTop: "-15%" }}
+            />
           </div>
+          <form className="row g-2" onSubmit={handleSubmit}>
+            <Row>
+              <label htmlFor="nom" className="form-label">
+                Mon nom :
+              </label>
+            </Row>
+            <Row xs={5} md={5}>
+              <input
+                type="text"
+                className="form-control"
+                id="nom"
+                value={nom}
+                onChange={handleInputChange}
+                style={{
+                  borderRadius: "15px",
+                }}
+                required
+              />
+            </Row>
+
+            <Row>
+              <label htmlFor="prenom" className="form-label">
+                Mon prénom :
+              </label>
+            </Row>
+            <Row xs={5} md={5}>
+              <input
+                type="text"
+                className="form-control"
+                id="prenom"
+                value={prenom}
+                onChange={handleInputChange}
+                style={{
+                  borderRadius: "15px",
+                }}
+                required
+              />
+            </Row>
+            <Row>
+              <label
+                htmlFor="description"
+                className="form-label"
+                style={{
+                  marginTop: "10px",
+                }}
+              >
+                Courte description :
+              </label>
+            </Row>
+            <Row>
+              <textarea
+                id="description"
+                placeholder="50 MOTS MAX"
+                className="form-control"
+                value={description}
+                style={{
+                  borderRadius: "15px",
+                  resize: "none",
+                }}
+                onChange={handleInputChange}
+                required
+              />
+            </Row>
+            <Row
+              style={{
+                marginTop: "10px",
+              }}
+            >
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="subscribe"
+                  // checked={subscribe}
+                   onChange={handleSubscribeChange}
+                />
+                <label className="form-check-label" htmlFor="subscribe">
+                  Je souhaite recevoir des actualités d'AssoShare et du monde
+                  associatif.
+                </label>
+              </div>
+            </Row>
+            <Row
+              style={{
+                marginTop: "10px",
+              }}
+            >
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="agreeTerms"
+                  // checked={agreeTerms}
+                   onChange={handleAgreeTermsChange}
+                  required
+                />
+                <label className="form-check-label" htmlFor="agreeTerms">
+                  J'ai lu et accepté les conditions d'utilisation de la
+                  plateforme Assoshare ainsi que le traitement du dossier.
+                </label>
+              </div>
+            </Row>
+            <Row>
+              <div className="col-12" style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+                {formIsValid ? (
+                  <button
+                    type="submit"
+                    style={buttonStyle}
+                    disabled={!formIsValid}
+                    onClick={handleSubmit}
+                  >
+                    VALIDATION
+                  </button>
+                ) : (
+                  <span
+                    style={{
+                      ...buttonStyle,
+                      pointerEvents: "none",
+                      opacity: 0.5,
+                    }}
+                  >
+                    VALIDATION
+                  </span>
+                )}
+              </div>
+            </Row>
+          </form>
         </div>
-        <div className="col-12">
-          <button type="submit" style={buttonStyle} >
-            Finaliser
-          </button>
-        </div>
-      </form>
+      </Row>
+
+      <img
+        src={purpleButtomFlowers}
+        alt="purpleButtomFlowers"
+        style={imageStyle}
+      />
     </div>
   );
 };
