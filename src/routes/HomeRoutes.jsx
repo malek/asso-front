@@ -9,7 +9,8 @@ import WelcomePage from "../pages/welcome/WelcomePage";
 import HomePage from "../pages/homePage/homePage";
 
 import FinalisationInscription from "../pages/candidatePage/FinalisationInscription";
-import Feed from "../pages/feedPage/Feed";
+import FeedUser from "../pages/feedPage/FeedUser";
+import FeedAsso from "../pages/feedPage/FeedAsso";
 
 const HomeRoutes = () => {
   return (
@@ -25,8 +26,9 @@ const HomeRoutes = () => {
       <Route path="/association2" element={<AssociationPage2 />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/Welcome" element={<WelcomePage />} />
-      <Route path="/home" element={<HomePage />}/>
-      <Route path="/feed" element={<Feed />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/feedUser" element={<FeedUser />} />
+      <Route path="/feedAsso" element={<FeedAsso />} />
     </Routes>
   );
 };

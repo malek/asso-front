@@ -16,17 +16,26 @@
   margin: 0;
   padding: 0;
 }
+
+html{
+  height: 100%;
+}
+body {
+   font-family: 'RobotoFlex', sans-serif;  
+   font-weight: bold;
+   background-color: #E5D2EC;
+   min-height: 100%;
+   display: flex;
+   flex-direction: column;
+}
+
+
 h1,h2 {
   
   font-family: 'SuperTea', sans-serif; 
   
 }
 
-body {
-   font-family: 'RobotoFlex', sans-serif;  
-   font-weight: bold;
-   background-color: #E5D2EC;
-}
 
 .btnText{
   font-family: 'SuperTea', sans-serif; 
@@ -34,5 +43,9 @@ body {
    letter-spacing: 1px;
 }
 
-
-
+.bottonNavBar {
+  background-color: #8675AA;
+  border-radius: 15px 15px 0 0;
+  /* position: fixed;*/
+  bottom: 0, 
+}
