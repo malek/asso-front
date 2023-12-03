@@ -49,3 +49,8 @@ h1,h2 {
   /* position: fixed;*/
   bottom: 0, 
 }
+
+input.nosubmit::placeholder {
+  color: #bbb;
+  font-family: 'RobotoFlex', sans-serif;
+}

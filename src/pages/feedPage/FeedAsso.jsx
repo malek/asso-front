@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import Avatar from "./Avatar";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-
+import { useState } from "react";
 import wavyDiv from "../../assets/feedImages/wavy.svg";
 import userAvatar from "../../assets/feedImages/usersPic/associationPicture.jpg";
 
@@ -25,6 +25,11 @@ import oiseauNocturne from "../../assets/feedImages/badges/oiseauNocturne.svg";
 import pluridisciplinaire from "../../assets/feedImages/badges/pluridisciplinaire.svg";
 import bienNote from "../../assets/feedImages/badges/bienNote.svg";
 const FeedAsso = () => {
+  const [activeButton, setActiveButton] = useState("monProfil");
+  const handleNavButtonClick = (buttonName) => {
+    setActiveButton(buttonName);
+  };
+
   const containerStyle = {
     position: "relative",
     width: "100%",
@@ -90,7 +95,7 @@ const FeedAsso = () => {
     <div>
       <Row>
         <div style={containerStyle}>
-          <img src={wavyDiv} alt="Wavy" />
+          <img src={wavyDiv} alt="Wavy" style={{ width: "100%" }} />
           <div
             className="d-flex flex-column align-items-center mb-5 mt-5"
             style={textStyle}
@@ -108,7 +113,7 @@ const FeedAsso = () => {
       <Row style={avatarRow}>
         <div
           className=" d-flex flex-column align-items-center mb-5 mt-5"
-          style={{ width: "90%" }}
+          style={{ width: "100%" }}
         >
           <Row>
             <Avatar imageName={userAvatar} />
@@ -502,25 +507,60 @@ const FeedAsso = () => {
           }}
         >
           <Col>
-            <Button style={{ border: "none" }}>
-              <img src={monProfilIcon} alt="monProfil" />
-            </Button>
+            <Link to="/feedAsso">
+              <Button
+                style={{
+                  border: "none",
+                  backgroundColor:
+                    activeButton === "monProfil" ? "#E5D2EC" : "",
+                }}
+                onClick={() => handleNavButtonClick("monProfil")}
+              >
+                <img src={monProfilIcon} alt="monProfil" />
+              </Button>
+            </Link>
           </Col>
 
           <Col>
-            <Button style={{ border: "none" }}>
-              <img src={notificationsIcon} alt="notification" />
-            </Button>
+            <Link to="/">
+              <Button
+                style={{
+                  border: "none",
+                  backgroundColor:
+                    activeButton === "notifications" ? "#E5D2EC" : "",
+                }}
+                onClick={() => handleNavButtonClick("notifications")}
+              >
+                <img src={notificationsIcon} alt="notification" />
+              </Button>
+            </Link>
           </Col>
           <Col>
-            <Button style={{ border: "none" }}>
-              <img src={messagerieIcon} alt="messagerie" />
-            </Button>
+            <Link to="/">
+              <Button
+                style={{
+                  border: "none",
+                  backgroundColor:
+                    activeButton === "messagerie" ? "#E5D2EC" : "",
+                }}
+                onClick={() => handleNavButtonClick("messagerie")}
+              >
+                <img src={messagerieIcon} alt="messagerie" />
+              </Button>
+            </Link>
           </Col>
           <Col>
-            <Button style={{ border: "none" }}>
-              <img src={settingsIcon} alt="settings" />
-            </Button>
+            <Link to="/param">
+              <Button
+                style={{
+                  border: "none",
+                  backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+                }}
+                onClick={() => handleNavButtonClick("settings")}
+              >
+                <img src={settingsIcon} alt="settings" />
+              </Button>
+            </Link>
           </Col>
         </Row>
       </div>

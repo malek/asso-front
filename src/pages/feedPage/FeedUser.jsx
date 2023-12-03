@@ -5,14 +5,10 @@ import Avatar from "./Avatar";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-
 import wavyDiv from "../../assets/feedImages/wavy.svg";
 import userAvatar from "../../assets/feedImages/usersPic/saif.jpeg";
 
-//icons pictures
+//navBar icons pictures
 import monProfilIcon from "../../assets/feedImages/iconsNavBar/monProfilIcon.svg";
 import messagerieIcon from "../../assets/feedImages/iconsNavBar/messagerieIcon.svg";
 import settingsIcon from "../../assets/feedImages/iconsNavBar/settingsIcon.svg";
@@ -31,6 +27,10 @@ import boiteComntaireIcon from "../../assets/feedImages/badges/autre/boiteComnta
 import etoilesIcon from "../../assets/feedImages/badges/autre/etoiles.svg";
 
 const FeedUser = () => {
+  const [activeButton, setActiveButton] = useState("monProfil");
+  const handleNavButtonClick = (buttonName) => {
+    setActiveButton(buttonName);
+  };
   const containerStyle = {
     position: "relative",
     width: "100%",
@@ -101,7 +101,7 @@ const FeedUser = () => {
     <div>
       <Row>
         <div style={containerStyle}>
-          <img src={wavyDiv} alt="Wavy" />
+          <img src={wavyDiv} alt="Wavy" style={{ width: "100%" }} />
           <div
             className="d-flex flex-column align-items-center mb-5 mt-5"
             style={textStyle}
@@ -538,25 +538,58 @@ const FeedUser = () => {
           }}
         >
           <Col>
-            <Button style={{ border: "none" }}>
+          <Link to="/feedUser">
+            <Button
+              style={{
+                border: "none",
+                backgroundColor: activeButton === "monProfil" ? "#E5D2EC" : "",
+              }}
+              onClick={() => handleNavButtonClick("monProfil")}
+            >
               <img src={monProfilIcon} alt="monProfil" />
             </Button>
+            </Link>
           </Col>
 
           <Col>
-            <Button style={{ border: "none" }}>
+          <Link to="/">
+            <Button
+              style={{
+                border: "none",
+                backgroundColor:
+                  activeButton === "notifications" ? "#E5D2EC" : "",
+              }}
+              onClick={() => handleNavButtonClick("notifications")}
+            >
               <img src={notificationsIcon} alt="notification" />
             </Button>
+            </Link>
           </Col>
           <Col>
-            <Button style={{ border: "none" }}>
+          <Link to="/">
+            <Button
+              style={{
+                border: "none",
+                backgroundColor: activeButton === "messagerie" ? "#E5D2EC" : "",
+              }}
+              onClick={() => handleNavButtonClick("messagerie")}
+            >
               <img src={messagerieIcon} alt="messagerie" />
             </Button>
+            </Link>
           </Col>
           <Col>
-            <Button style={{ border: "none" }}>
+          <Link to="/param">
+            <Button
+              style={{
+                border: "none",
+                backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+              }}
+              onClick={() => handleNavButtonClick("settings")}
+            >
               <img src={settingsIcon} alt="settings" />
             </Button>
+            </Link>
           </Col>
         </Row>
       </div>

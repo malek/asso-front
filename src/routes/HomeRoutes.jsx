@@ -11,6 +11,7 @@ import HomePage from "../pages/homePage/homePage";
 import FinalisationInscription from "../pages/candidatePage/FinalisationInscription";
 import FeedUser from "../pages/feedPage/FeedUser";
 import FeedAsso from "../pages/feedPage/FeedAsso";
+import Parametre from "../pages/navBarPages/Parametre";
 
 const HomeRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const HomeRoutes = () => {
       <Route path="/home" element={<HomePage />} />
       <Route path="/feedUser" element={<FeedUser />} />
       <Route path="/feedAsso" element={<FeedAsso />} />
+      <Route path="/param" element={<Parametre />} />
     </Routes>
   );
 };
