@@ -12,7 +12,8 @@ import FinalisationInscription from "../pages/candidatePage/FinalisationInscript
 import FeedUser from "../pages/feedPage/FeedUser";
 import FeedAsso from "../pages/feedPage/FeedAsso";
 import Parametre from "../pages/navBarPages/Parametre";
-
+import Messagerie from "../pages/navBarPages/Messagerie";
+import MessagerieChat from "../pages/navBarPages/MessagerieChat";
 const HomeRoutes = () => {
   return (
     <Routes>
@@ -31,6 +32,8 @@ const HomeRoutes = () => {
       <Route path="/feedUser" element={<FeedUser />} />
       <Route path="/feedAsso" element={<FeedAsso />} />
       <Route path="/param" element={<Parametre />} />
+      <Route path="/messagerie" element={<Messagerie />} />
+      <Route path="/messagerieChat" element={<MessagerieChat />} />
     </Routes>
   );
 };
