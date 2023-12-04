@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import { Row, Container } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 
 import nuageAsso from "../../assets/landingImages/LOGO-ASSOHARE.svg";
 import illusHome from "../../assets/landingImages/illus_homepage.svg";
 import purpleButtomFlowers from "../../assets/inscription/purpleButtomFlowers.svg";
 
 const Landing = () => {
+  
+
   const navigate = useNavigate();
   const imageStyleLogo = {
     width: "45%", // Set the desired width
@@ -75,18 +78,21 @@ const Landing = () => {
     if (!formIsValid) return;
 
     const userData = {
-      email: email,
-      password: password,
+      email: "saif5@gmail.com",
+      password: "123456",
     };
-    try {
-      //  await axios.post('http://localhost:8000/api/users', userData);
-      navigate("/"); // Redirection vers la page des bénévoles
-      // history.push("/candidat2");
-
-      // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
-    } catch (error) {
-      console.error("Erreur lors de l'envoi du formulaire :", error);
-      // Gérer l'erreur, par exemple en affichant un message d'erreur
+    const AssoData = {
+      email: "asso5@gmail.com",
+      password: "123456",
+    };
+    if (email === userData.email && password === userData.password) {
+      navigate('/home');
+    } else if (email === AssoData.email && password === AssoData.password) {
+      navigate('/homeAsso');
+    } else {
+      // Si les identifiants ne correspondent à aucun des deux ensembles,
+      // afficher une alerte et ne pas rediriger.
+      alert('Incorrect username or password');
     }
   };
 
