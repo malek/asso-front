@@ -41,8 +41,7 @@ const AssociationPage = () => {
     borderRadius: "0 0 18% 18%",
     letterSpacing: "2px",
     fontFamily: "'SuperTea', sans-serif",
-    marginTop : "-10%"
-    
+    marginTop: "-10%",
   };
   const navigate = useNavigate();
 
@@ -56,8 +55,8 @@ const AssociationPage = () => {
 
   useEffect(() => {
     // Disable scrolling on mount
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "auto";
+    document.body.style.overflow = "auto";
 
     // Re-enable scrolling on unmount or component update
     return () => {
@@ -67,85 +66,74 @@ const AssociationPage = () => {
   }, []);
 
   useEffect(() => {
-    const isValid =
-      email &&
-      rxNational &&
-      rna &&
-      ville &&
-      numTel &&
-      password
+    const isValid = email && rxNational && rna && ville && numTel && password;
     setFormIsValid(isValid);
 
     // Cleanup function for form validation useEffect
   }, [email, password, rxNational, rna, ville, numTel]);
 
-  
   const handleInputChange = (e) => {
-     const inputs = document.querySelectorAll(
+    const inputs = document.querySelectorAll(
       "input[required], select[required]"
     );
-  
-  switch (e.target.id) {
-    case "email":
-      setEmail(e.target.value);
-      break;
-    case "reseau": // Assurez-vous que l'ID est correct dans le JSX
-      setRxNational(e.target.value);
-      break;
-    case "rna":
-      setRna(e.target.value);
-      break;
-    case "ville":
-      setVille(e.target.value);
-      break;
-    case "telephone": // Assurez-vous que l'ID est correct dans le JSX
-      setNumTel(e.target.value);
-      break;
-    case "inputmdp": // Assurez-vous que l'ID est correct dans le JSX
-      setPassword(e.target.value);
-      break;
-  
-  }
-   
-  const isValid = Array.from(
-    document.querySelectorAll("input[required], select[required]")
-  ).every((input) => input.checkValidity());
+
+    switch (e.target.id) {
+      case "email":
+        setEmail(e.target.value);
+        break;
+      case "reseau": // Assurez-vous que l'ID est correct dans le JSX
+        setRxNational(e.target.value);
+        break;
+      case "rna":
+        setRna(e.target.value);
+        break;
+      case "ville":
+        setVille(e.target.value);
+        break;
+      case "telephone": // Assurez-vous que l'ID est correct dans le JSX
+        setNumTel(e.target.value);
+        break;
+      case "inputmdp": // Assurez-vous que l'ID est correct dans le JSX
+        setPassword(e.target.value);
+        break;
+    }
+
+    const isValid = Array.from(
+      document.querySelectorAll("input[required], select[required]")
+    ).every((input) => input.checkValidity());
 
     setFormIsValid(isValid);
-
   };
- 
-  const handleSubmit =async (e)=> {
-    
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formIsValid) return;
 
     const userDataAsso = {
-      email : email,
+      email: email,
 
-      description: "description" ,
-      rxNational:rxNational ,
+      description: "description",
+      rxNational: rxNational,
       rna: rna,
       ville: ville,
       numTel: numTel,
       password: password,
-      isAsso: true
+      isAsso: true,
+    };
+
+    try {
+      console.log(userDataAsso);
+      sessionStorage.setItem("userDataAsso", JSON.stringify(userDataAsso));
+      navigate("/association2");
+      // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
+    } catch (error) {
+      console.error("Erreur lors de l'envoi du formulaire :", error);
+      // Gérer l'erreur, par exemple en affichant un message d'erreur
+    }
   };
 
-  try {
-      console.log(userDataAsso);
-      sessionStorage.setItem('userDataAsso', JSON.stringify(userDataAsso));
-      navigate('/association2'); 
-    // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
-  } catch (error) {
-    console.error('Erreur lors de l\'envoi du formulaire :', error);
-    // Gérer l'erreur, par exemple en affichant un message d'erreur
-  }
-}
-  
-  
   return (
-    <div>
+    <div className="mb-5">
       <Row>
         <div style={purpleDivStyle}>
           <div className="d-flex flex-column align-items-center mb-5 mt-5">
@@ -167,9 +155,14 @@ const AssociationPage = () => {
                 </label>
               </Row>
               <Row>
-                <select id="inputState" className="form-select" required style={{
-                  borderRadius: "15px",
-                }}>
+                <select
+                  id="inputState"
+                  className="form-select"
+                  required
+                  style={{
+                    borderRadius: "15px",
+                  }}
+                >
                   <option value="" disabled>
                     Choisissez votre structure...
                   </option>
@@ -180,8 +173,6 @@ const AssociationPage = () => {
                 </select>
               </Row>
             </div>
-
-          
 
             <Row>
               <Col>
@@ -334,10 +325,7 @@ const AssociationPage = () => {
           }}
         >
           <button style={annulerButtonStyle}>
-            <Link
-              to="/"
-              style={{ color: "white", textDecoration: "none" }}
-            >
+            <Link to="/" style={{ color: "white", textDecoration: "none" }}>
               RETOUR
             </Link>
           </button>

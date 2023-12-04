@@ -7,14 +7,8 @@ import { Link } from "react-router-dom";
 import Avatar from "../feedPage/Avatar";
 
 import wavyDiv from "../../assets/feedImages/wavy.svg";
+import userAvatar from "../../assets/feedImages/usersPic/associationPicture.jpg";
 
-//user Pics
-import user1 from "../../assets/messagesUser/user1.svg";
-import user2 from "../../assets/messagesUser/user2.svg";
-import user3 from "../../assets/messagesUser/user3.svg";
-import user4 from "../../assets/messagesUser/user4.svg";
-import user5 from "../../assets/messagesUser/user5.svg";
-import user6 from "../../assets/messagesUser/user6.svg";
 //navBar icons pictures
 import monProfilIcon from "../../assets/feedImages/iconsNavBar/monProfilIcon.svg";
 import messagerieIcon from "../../assets/feedImages/iconsNavBar/messagerieIcon.svg";
@@ -25,7 +19,7 @@ const MessagerieChat = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
 
   //For the navBar btns
-  const [activeButton, setActiveButton] = useState("settings");
+  const [activeButton, setActiveButton] = useState("messagerie");
 
   const handleNavButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -93,6 +87,33 @@ const MessagerieChat = () => {
     padding: "2%",
     zIndex: 10, // You can adjust the z-index as needed
   };
+
+  const leftMessageStyle = {
+    width: "16rem",
+    backgroundColor: "#BFB0DF",
+    borderRadius: "0px 0px 0px 20%",
+    padding: "1rem",
+    outline: "none",
+    marginBottom: "1rem", // Add margin at the bottom to separate messages
+  };
+
+  const rightMessageStyle = {
+    width: "16rem",
+    backgroundColor: "#8675AA",
+    borderRadius: "0px 0px 20% 0px",
+    padding: "1rem",
+    outline: "none",
+    marginBottom: "1rem",
+    marginLeft: "auto", // Align message to the right
+  };
+
+  const messages = [
+    "Bonjour ! Je suis très intéressé par votre atelier. Il y a-t-il un nombre de place disponible ?",
+    "Pour les participants, non ! C'est ouvert à tous.",
+    "Oh je vois ! C'est super, je compte ramener deux amis.",
+    "Génial !",
+  ];
+
   return (
     <div>
       <Row>
@@ -109,15 +130,48 @@ const MessagerieChat = () => {
               >
                 MESSAGERIE
               </p>
-
             </div>
           </Row>
         </div>
 
-        <div style={msgHistoriqueDivStyle}>
-            
+        <div
+          style={msgHistoriqueDivStyle}
+          className=" mt-3"
+        >
+          <div
+            className=" d-flex flex-column align-items-center"
+            //style={{ width: "100%" }}
+          >
+            <Row>
+              <Avatar imageName={userAvatar} />
+            </Row>
+            <Row className=" d-flex flex-column align-items-center">
+              <p
+                className="fs-3"
+                style={{
+                  color: "black",
+                  fontFamily: "SuperTea",
+                  marginTop: "-10%",
+                  marginBottom: "3%",
+                }}
+              >
+                ASSO TRUCMUCHE
+              </p>
+            </Row>
+          </div>
+          <div>
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                tabIndex="0"
+                className="relative group"
+                style={index % 2 === 0 ? rightMessageStyle : leftMessageStyle}
+              >
+                <p>{message}</p>
+              </div>
+            ))}
+          </div>
         </div>
-          
       </Row>
 
       <div style={divButtomNavBar} className="align-items-center ">
@@ -147,8 +201,7 @@ const MessagerieChat = () => {
               <Button
                 style={{
                   border: "none",
-                  backgroundColor:
-                    activeButton === "events" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "events" ? "#E5D2EC" : "",
                 }}
                 onClick={() => handleNavButtonClick("events")}
               >
@@ -157,7 +210,7 @@ const MessagerieChat = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/">
+            <Link to="/messagerie">
               <Button
                 style={{
                   border: "none",

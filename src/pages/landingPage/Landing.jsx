@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import { Row, Container } from "react-bootstrap";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import nuageAsso from "../../assets/landingImages/LOGO-ASSOHARE.svg";
 import illusHome from "../../assets/landingImages/illus_homepage.svg";
 import purpleButtomFlowers from "../../assets/inscription/purpleButtomFlowers.svg";
 
 const Landing = () => {
-  
-
   const navigate = useNavigate();
   const imageStyleLogo = {
     width: "45%", // Set the desired width
@@ -37,6 +35,7 @@ const Landing = () => {
     background: "white",
     borderRadius: "18% 18% 0 0",
     marginTop: "-5%",
+    marginBottom: "20%",
     //marginBottom: "100%",
     //flex: 1, // Take remaining height
   };
@@ -51,8 +50,8 @@ const Landing = () => {
 
   useEffect(() => {
     // Disable scrolling on mount
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "auto";
+    document.body.style.overflow = "auto";
 
     // Re-enable scrolling on unmount or component update
     return () => {
@@ -86,11 +85,11 @@ const Landing = () => {
       password: "123456",
     };
     if (email === userData.email && password === userData.password) {
-      navigate('/feedUser');
+      navigate("/feedUser");
     } else if (email === AssoData.email && password === AssoData.password) {
-      navigate('/feedAsso');
+      navigate("/feedAsso");
     } else {
-      alert('Incorrect username or password');
+      alert("Incorrect username or password");
     }
   };
 
@@ -250,7 +249,7 @@ const Landing = () => {
                   </div>
                 </form>
                 <Row>
-                  <div className="col-12">
+                  <div className="col-12 mb-5">
                     {formIsValid ? (
                       <button
                         type="submit"

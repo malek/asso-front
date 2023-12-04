@@ -15,8 +15,8 @@ const CandidatePage2 = () => {
     color: "white",
     display: "inline-block",
     cursor: "pointer",
-    marginTop: "5%", 
-    fontFamily: "SuperTea", 
+    marginTop: "5%",
+    fontFamily: "SuperTea",
     position: "relative",
     zIndex: 1,
     borderRadius: "15px",
@@ -41,12 +41,12 @@ const CandidatePage2 = () => {
     console.log("Selected File:", selectedFile);
   };
 
-   const [subscribe, setSubscribe] = useState(false);
+  const [subscribe, setSubscribe] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
-  const initialUserData = JSON.parse(sessionStorage.getItem('userData')) || {};
-  const [description, setDescription] = useState( "");
-  const [nom, setNom] = useState( "");
-  const [prenom, setPrenom] = useState( "");
+  const initialUserData = JSON.parse(sessionStorage.getItem("userData")) || {};
+  const [description, setDescription] = useState("");
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
 
   const handleDescriptionChange = (e) => {
     const inputDescription = e.target.value;
@@ -59,8 +59,8 @@ const CandidatePage2 = () => {
 
   useEffect(() => {
     // Disable scrolling on mount
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "auto";
+    document.body.style.overflow = "auto";
 
     // Re-enable scrolling on unmount or component update
     return () => {
@@ -102,9 +102,8 @@ const CandidatePage2 = () => {
       document.querySelectorAll("input[required], select[required]")
     ).every((input) => input.checkValidity());
     //   setFormIsValid(isValid);
-// };
- 
-  }
+    // };
+  };
   const handleSubscribeChange = () => {
     setSubscribe(!subscribe);
   };
@@ -119,20 +118,22 @@ const CandidatePage2 = () => {
       ...initialUserData,
       nom: nom,
       prenom: prenom,
-      description: description
+      description: description,
     };
     ajouterUtilisateur(finalUserData);
     console.log("Données finales soumises:", finalUserData); // Afficher dans la console
-    navigate('/finalisationInscription'); 
-    
+    navigate("/finalisationInscription");
   };
   const ajouterUtilisateur = async (finalUserData) => {
     try {
-      const response = await axios.post('http://localhost:8000/api/users', finalUserData);
+      const response = await axios.post(
+        "http://localhost:8000/api/users",
+        finalUserData
+      );
       // Gérer la réponse, par exemple en redirigeant l'utilisateur
       // vers une autre page ou en affichant un message de succès
     } catch (error) {
-      console.error('Erreur lors de l\'ajout de l\'utilisateur :', error);
+      console.error("Erreur lors de l'ajout de l'utilisateur :", error);
       // Gérer l'erreur, par exemple en affichant un message d'erreur
     }
   };
@@ -147,7 +148,7 @@ const CandidatePage2 = () => {
   };
 
   return (
-    <div>
+    <div className="mb-5">
       <Row>
         <div style={purpleDivStyle}>
           <div className="d-flex flex-column align-items-center mb-5 mt-5">
@@ -250,7 +251,7 @@ const CandidatePage2 = () => {
                   className="form-check-input"
                   id="subscribe"
                   // checked={subscribe}
-                   onChange={handleSubscribeChange}
+                  onChange={handleSubscribeChange}
                 />
                 <label className="form-check-label" htmlFor="subscribe">
                   Je souhaite recevoir des actualités d'AssoShare et du monde
@@ -269,7 +270,7 @@ const CandidatePage2 = () => {
                   className="form-check-input"
                   id="agreeTerms"
                   // checked={agreeTerms}
-                   onChange={handleAgreeTermsChange}
+                  onChange={handleAgreeTermsChange}
                   required
                 />
                 <label className="form-check-label" htmlFor="agreeTerms">
@@ -279,11 +280,14 @@ const CandidatePage2 = () => {
               </div>
             </Row>
             <Row>
-              <div className="col-12" style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}>
+              <div
+                className="col-12"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 {formIsValid ? (
                   <button
                     type="submit"

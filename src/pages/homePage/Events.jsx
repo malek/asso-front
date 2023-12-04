@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import BeautifulCards from "../../components/card/BeautifulCards";
 import CardForm from "../../components/cardForm/cardForm";
-import { Form, FormControl, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import "../../assets/cardsImages/EventsPageStyles.css"; // Assurez-vous que le chemin est correct
 
@@ -103,6 +103,13 @@ const Events = () => {
               </div>
             </div>
           </Row>
+        </div>
+        <div className="d-flex flex-column align-items-center mt-1">
+          <Link to={"/"} style={buttonStyle}>
+            <button onClick={handleAddClick} >
+              Ouvrir carte
+            </button>
+          </Link>
         </div>
         <BeautifulCards /> {/* Ajout des cartes statiques */}
         <div className="d-flex flex-column align-items-center mb-5 mt-5">

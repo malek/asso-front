@@ -10,6 +10,8 @@ import wavyDiv from "../../assets/feedImages/wavy.svg";
 
 //user Pics
 import user1 from "../../assets/messagesUser/user1.svg";
+//import user1 from "../../assets/feedImages/usersPic/associationPicture.svg"; 
+
 import user2 from "../../assets/messagesUser/user2.svg";
 import user3 from "../../assets/messagesUser/user3.svg";
 import user4 from "../../assets/messagesUser/user4.svg";
@@ -125,9 +127,10 @@ const Messagerie = () => {
         </div>
 
         <div style={msgHistoriqueDivStyle}>
+          <Link to={"/MessagerieChat"}>
           <Row style={rowStyle}>
             <Col className="col-3" >
-              {" "}
+          
               <Avatar imageName={user1} />
             </Col>
             <Col>
@@ -149,6 +152,8 @@ const Messagerie = () => {
               </Row>
             </Col>
           </Row>
+          </Link>
+          
           <Row style={{ backgroundColor: "#D9D9D9" }}>
             <Col className="col-3">
               {" "}

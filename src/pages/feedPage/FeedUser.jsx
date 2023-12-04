@@ -397,6 +397,7 @@ const FeedUser = () => {
                   fontFamily: "SuperTea",
                   letterSpacing: "1px",
                   display: "flex",
+                  fontSize: "5px",
                   justifyContent: "start",
                   //marginLeft: "-40%",
                 }}
@@ -494,7 +495,7 @@ const FeedUser = () => {
         </div>
 
         <Row
-          className="col-10"
+          className="col-10 mb-5"
           style={{
             display: "flex",
             justifyContent: "center",
@@ -504,7 +505,7 @@ const FeedUser = () => {
         >
           <button style={titreButtonStyle}>
             <Link
-              to="/"
+              to="/param"
               style={{
                 color: "white",
                 textDecoration: "none",
@@ -538,57 +539,58 @@ const FeedUser = () => {
           }}
         >
           <Col>
-          <Link to="/feedUser">
-            <Button
-              style={{
-                border: "none",
-                backgroundColor: activeButton === "monProfil" ? "#E5D2EC" : "",
-              }}
-              onClick={() => handleNavButtonClick("monProfil")}
-            >
-              <img src={monProfilIcon} alt="monProfil" />
-            </Button>
+            <Link to="/feedUser">
+              <Button
+                style={{
+                  border: "none",
+                  backgroundColor:
+                    activeButton === "monProfil" ? "#E5D2EC" : "",
+                }}
+                onClick={() => handleNavButtonClick("monProfil")}
+              >
+                <img src={monProfilIcon} alt="monProfil" />
+              </Button>
             </Link>
           </Col>
 
           <Col>
-          <Link to="/">
-            <Button
-              style={{
-                border: "none",
-                backgroundColor:
-                  activeButton === "events" ? "#E5D2EC" : "",
-              }}
-              onClick={() => handleNavButtonClick("events")}
-            >
-              <img src={eventsIcon} alt="events" />
-            </Button>
+            <Link to="/events">
+              <Button
+                style={{
+                  border: "none",
+                  backgroundColor: activeButton === "events" ? "#E5D2EC" : "",
+                }}
+                onClick={() => handleNavButtonClick("events")}
+              >
+                <img src={eventsIcon} alt="events" />
+              </Button>
             </Link>
           </Col>
           <Col>
-          <Link to="/">
-            <Button
-              style={{
-                border: "none",
-                backgroundColor: activeButton === "messagerie" ? "#E5D2EC" : "",
-              }}
-              onClick={() => handleNavButtonClick("messagerie")}
-            >
-              <img src={messagerieIcon} alt="messagerie" />
-            </Button>
+            <Link to="/messagerie">
+              <Button
+                style={{
+                  border: "none",
+                  backgroundColor:
+                    activeButton === "messagerie" ? "#E5D2EC" : "",
+                }}
+                onClick={() => handleNavButtonClick("messagerie")}
+              >
+                <img src={messagerieIcon} alt="messagerie" />
+              </Button>
             </Link>
           </Col>
           <Col>
-          <Link to="/param">
-            <Button
-              style={{
-                border: "none",
-                backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
-              }}
-              onClick={() => handleNavButtonClick("settings")}
-            >
-              <img src={settingsIcon} alt="settings" />
-            </Button>
+            <Link to="/param">
+              <Button
+                style={{
+                  border: "none",
+                  backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+                }}
+                onClick={() => handleNavButtonClick("settings")}
+              >
+                <img src={settingsIcon} alt="settings" />
+              </Button>
             </Link>
           </Col>
         </Row>

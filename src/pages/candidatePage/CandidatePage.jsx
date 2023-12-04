@@ -49,8 +49,8 @@ const CandidatePage = () => {
 
   useEffect(() => {
     // Disable scrolling on mount
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "auto";
+    document.body.style.overflow = "auto";
 
     // Re-enable scrolling on unmount or component update
     return () => {
@@ -60,11 +60,9 @@ const CandidatePage = () => {
   }, []);
 
   useEffect(() => {
-    const isValid = email && password && 
-                    dateNaissance && ville && numTel;
+    const isValid = email && password && dateNaissance && ville && numTel;
     setFormIsValid(isValid);
   }, [email, password, dateNaissance, ville, numTel]);
- 
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Empêcher le rechargement de la page
@@ -80,13 +78,13 @@ const CandidatePage = () => {
       ville: ville,
       numTel: numTel,
       description: "description",
-      isBenevole: isBenevole // Assurez-vous que cette logique correspond à votre besoin
+      isBenevole: isBenevole, // Assurez-vous que cette logique correspond à votre besoin
     };
     try {
       //  await axios.post('http://localhost:8000/api/users', userData);
       console.log(userData);
-      sessionStorage.setItem('userData', JSON.stringify(userData));
-      navigate('/candidat2'); // Redirection vers la page des bénévoles
+      sessionStorage.setItem("userData", JSON.stringify(userData));
+      navigate("/candidat2"); // Redirection vers la page des bénévoles
 
       // Gérer la réponse, par exemple en redirigeant l'utilisateur ou en affichant un message de succès
     } catch (error) {
@@ -101,12 +99,12 @@ const CandidatePage = () => {
     const inputs = document.querySelectorAll(
       "input[required], select[required]"
     );
-    if (e.target.id === 'benevole') {
+    if (e.target.id === "benevole") {
       setIsBenevole(true);
-    } else if (e.target.id === 'participant') {
+    } else if (e.target.id === "participant") {
       setIsBenevole(false);
     }
-  
+
     // const isValid = Array.from(inputs).every((input) => input.checkValidity());
 
     // setFormIsValid(isValid);
@@ -118,7 +116,7 @@ const CandidatePage = () => {
       case "inputmdp":
         setPassword(e.target.value);
         break;
-      case 'dob':
+      case "dob":
         setDateNaissance(e.target.value);
         break;
       case "ville":
@@ -127,8 +125,8 @@ const CandidatePage = () => {
       case "numTel":
         setNumTel(e.target.value);
         break;
-  };
- 
+    }
+
     // Vérifier si le formulaire est valide
     const isValid = Array.from(
       document.querySelectorAll("input[required], select[required]")
@@ -142,16 +140,19 @@ const CandidatePage = () => {
     borderRadius: "0 0 18% 18%",
     letterSpacing: "2px",
     fontFamily: "'SuperTea', sans-serif",
-    marginTop : "-10%"
-    
+    marginTop: "-10%",
   };
   return (
-    <div>
+    <div className="mb-5">
       <Row>
         <div style={purpleDivStyle}>
-          <div className="d-flex flex-column align-items-center mb-5 mt-5" >
-            <p className="fs-3" style={{ marginTop : "5%"}}>JE SUIS PARTICIPANT!</p>
-            <p className="fs-3" style={{ marginBottom : "-5%"}}>ÉTAPE 1</p>
+          <div className="d-flex flex-column align-items-center mb-5 mt-5">
+            <p className="fs-3" style={{ marginTop: "5%" }}>
+              JE SUIS PARTICIPANT!
+            </p>
+            <p className="fs-3" style={{ marginBottom: "-5%" }}>
+              ÉTAPE 1
+            </p>
           </div>
         </div>
         <div className="container p-4">
@@ -159,9 +160,7 @@ const CandidatePage = () => {
             <div className="col-12">
               <Row>
                 <Col xs={4} md={4} style={{ marginLeft: "10px" }}>
-                  <label  className="form-label">
-                    Je veux :
-                  </label>
+                  <label className="form-label">Je veux :</label>
                 </Col>
                 <Col style={{ marginLeft: "-30px" }}>
                   <Row>
@@ -218,7 +217,6 @@ const CandidatePage = () => {
                 onChange={handleInputChange}
                 style={{
                   borderRadius: "15px",
-                  
                 }}
               />
             </Row>
@@ -242,7 +240,6 @@ const CandidatePage = () => {
                 onChange={handleInputChange}
                 style={{
                   borderRadius: "15px",
-                  
                 }}
               />
             </Row>
@@ -265,7 +262,6 @@ const CandidatePage = () => {
                 onChange={handleInputChange}
                 style={{
                   borderRadius: "15px",
-                 
                 }}
               />
             </Row>
@@ -287,7 +283,6 @@ const CandidatePage = () => {
                 onChange={handleInputChange}
                 style={{
                   borderRadius: "15px",
-                 
                 }}
               />
             </Row>
@@ -318,7 +313,6 @@ const CandidatePage = () => {
                 onChange={handleInputChange}
                 style={{
                   borderRadius: "15px",
-                  
                 }}
               />
             </Row>
@@ -333,14 +327,11 @@ const CandidatePage = () => {
             justifyContent: "center",
             alignItems: "center",
             marginTop: "10%",
-            marginBottom: "-5%"
+            marginBottom: "-5%",
           }}
         >
           <button style={annulerButtonStyle}>
-            <Link
-              to="/"
-              style={{ color: "white", textDecoration: "none" }}
-            >
+            <Link to="/" style={{ color: "white", textDecoration: "none" }}>
               RETOUR
             </Link>
           </button>

@@ -11,10 +11,11 @@ import axios from "axios";
 
 const AssociationPage2 = () => {
   const navigate = useNavigate();
-  const initialUserDataAsso = JSON.parse(sessionStorage.getItem('userDataAsso')) || {};
+  const initialUserDataAsso =
+    JSON.parse(sessionStorage.getItem("userDataAsso")) || {};
   const [formIsValid, setFormIsValid] = useState(false);
   const [description, setDescription] = useState("");
-  const [nom,setNom]= useState("");
+  const [nom, setNom] = useState("");
 
   const buttonStyle = {
     backgroundColor: "#8675AA",
@@ -85,14 +86,15 @@ const AssociationPage2 = () => {
   };
   const ajouterAsso = async (finalUserDataAsso) => {
     try {
-      const response = await axios.post('http://localhost:8000/api/users', finalUserDataAsso);
+      const response = await axios.post(
+        "http://localhost:8000/api/users",
+        finalUserDataAsso
+      );
       // Gérer la réponse, par exemple en redirigeant l'utilisateur
       // vers une autre page ou en affichant un message de succès
       // Remplacez par le chemin de votre page
-
-
     } catch (error) {
-      console.error('Erreur lors de l\'ajout de l\'utilisateur :', error);
+      console.error("Erreur lors de l'ajout de l'utilisateur :", error);
       // Gérer l'erreur, par exemple en affichant un message d'erreur
     }
   };
@@ -103,22 +105,21 @@ const AssociationPage2 = () => {
     const finalUserDataAsso = {
       ...initialUserDataAsso,
       description: description,
-      nom : nom
+      nom: nom,
     };
     if (!formIsValid) return;
     const userData = {
       nom: "nom",
       description: "description",
     };
-    try{
-    ajouterAsso(finalUserDataAsso);
-    console.log("Données finales soumises:", finalUserDataAsso); // Afficher dans la console
-    navigate("/finalisationInscription"); }
-    catch (error) {
+    try {
+      ajouterAsso(finalUserDataAsso);
+      console.log("Données finales soumises:", finalUserDataAsso); // Afficher dans la console
+      navigate("/finalisationInscription");
+    } catch (error) {
       console.error("Erreur lors de l'envoi du formulaire :", error);
       // Gérer l'erreur, par exemple en affichant un message d'erreur
     }
-
   };
 
   const handleSubscribeChange = () => {
@@ -131,8 +132,8 @@ const AssociationPage2 = () => {
 
   useEffect(() => {
     // Disable scrolling on mount
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "auto";
+    document.body.style.overflow = "auto";
 
     // Re-enable scrolling on unmount or component update
     return () => {
@@ -147,7 +148,6 @@ const AssociationPage2 = () => {
 
     // Cleanup function for form validation useEffect
   }, [nom, description, agreeTerms, subscribe]);
-
 
   const handleInputChange = (e) => {
     // Perform validation or checks based on your requirements
@@ -183,7 +183,7 @@ const AssociationPage2 = () => {
   };
 
   return (
-    <div>
+    <div className="mb-5">
       <Row>
         <div style={purpleDivStyle}>
           <div className="d-flex flex-column align-items-center mb-5 mt-5">
@@ -437,6 +437,7 @@ const AssociationPage2 = () => {
         style={imageStyle}
       />
     </div>
-  );}
+  );
+};
 
 export default AssociationPage2;

@@ -522,12 +522,11 @@ const FeedAsso = () => {
           </Col>
 
           <Col>
-            <Link to="/">
+            <Link to="/events">
               <Button
                 style={{
                   border: "none",
-                  backgroundColor:
-                    activeButton === "events" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "events" ? "#E5D2EC" : "",
                 }}
                 onClick={() => handleNavButtonClick("events")}
               >
@@ -536,7 +535,7 @@ const FeedAsso = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/">
+            <Link to="/messagerie">
               <Button
                 style={{
                   border: "none",
