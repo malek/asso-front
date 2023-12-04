@@ -88,10 +88,8 @@ const Landing = () => {
     if (email === userData.email && password === userData.password) {
       navigate('/home');
     } else if (email === AssoData.email && password === AssoData.password) {
-      navigate('/homeAsso');
+      navigate('/home');
     } else {
-      // Si les identifiants ne correspondent à aucun des deux ensembles,
-      // afficher une alerte et ne pas rediriger.
       alert('Incorrect username or password');
     }
   };
