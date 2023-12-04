@@ -36,7 +36,7 @@ const Events = () => {
     position: "relative",
     width: "100%",
   };
-
+ 
   const textStyle = {
     position: "absolute",
     top: "20%",
@@ -103,6 +103,13 @@ const Events = () => {
               </div>
             </div>
           </Row>
+        </div>
+        <div className="d-flex flex-column align-items-center mt-1">
+          <Link to={"/map"} style={buttonStyle}>
+            <button onClick={handleAddClick} >
+              Ouvrir carte
+            </button>
+          </Link>
         </div>
         <BeautifulCards /> {/* Ajout des cartes statiques */}
         <div className="d-flex flex-column align-items-center mb-5 mt-5">

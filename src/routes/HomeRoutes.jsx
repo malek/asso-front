@@ -7,6 +7,7 @@ import AssociationPage2 from "../pages/associationPage/AssociationEtape2";
 import LoginPage from "../pages/loginPage/LoginPage";
 import WelcomePage from "../pages/welcome/WelcomePage";
 import Events from "../pages/homePage/Events";
+import MapPage from "../pages/mappage/mapPage";
 
 import FinalisationInscription from "../pages/candidatePage/FinalisationInscription";
 import FeedUser from "../pages/feedPage/FeedUser";
@@ -34,6 +35,7 @@ const HomeRoutes = () => {
       <Route path="/param" element={<Parametre />} />
       <Route path="/messagerie" element={<Messagerie />} />
       <Route path="/messagerieChat" element={<MessagerieChat />} />
+      <Route path="/map" element={<MapPage/>}/>
     </Routes>
   );
 };
