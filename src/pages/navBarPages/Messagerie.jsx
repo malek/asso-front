@@ -19,13 +19,13 @@ import user6 from "../../assets/messagesUser/user6.svg";
 import monProfilIcon from "../../assets/feedImages/iconsNavBar/monProfilIcon.svg";
 import messagerieIcon from "../../assets/feedImages/iconsNavBar/messagerieIcon.svg";
 import settingsIcon from "../../assets/feedImages/iconsNavBar/settingsIcon.svg";
-import notificationsIcon from "../../assets/feedImages/iconsNavBar/notificationsIcon.svg";
+import eventsIcon from "../../assets/feedImages/iconsNavBar/eventsIcon.svg";
 
 const Messagerie = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
 
   //For the navBar btns
-  const [activeButton, setActiveButton] = useState("settings");
+  const [activeButton, setActiveButton] = useState("messagerie");
 
   const handleNavButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -295,21 +295,21 @@ const Messagerie = () => {
           </Col>
 
           <Col>
-            <Link to="/">
+            <Link to="/events">
               <Button
                 style={{
                   border: "none",
                   backgroundColor:
-                    activeButton === "notifications" ? "#E5D2EC" : "",
+                    activeButton === "events" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("notifications")}
+                onClick={() => handleNavButtonClick("events")}
               >
-                <img src={notificationsIcon} alt="notification" />
+                <img src={eventsIcon} alt="events" />
               </Button>
             </Link>
           </Col>
           <Col>
-            <Link to="/">
+            <Link to="/messagerie">
               <Button
                 style={{
                   border: "none",

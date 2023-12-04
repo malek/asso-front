@@ -1,10 +1,11 @@
 /* HomePageStyles.css */
-  .headerContainer{
+  /* .headerContainer{
     background-image: url('../../assets/cardsImages/HEADER.png');
   background-size: cover; /* or use 'contain' depending on your image */
-  background-repeat: no-repeat;
-  background-position: bottom center;  }
-.titleStyle {
+  /* background-repeat: no-repeat;
+  background-position: bottom center;  } 
+  */ 
+/* .titleStyle {
     display: flex;
     flex-direction: row;
     margin-left: 5%;
@@ -17,13 +18,13 @@
     text-align: left;
     color: #FFFFFF;
 
-  }
+  } */
   
 
-.searchBarStyle {
+/* .searchBarStyle {
     display: flex;
     flex-direction: column;
-  }
+  } */
 
 .headerImageStyle {
 }

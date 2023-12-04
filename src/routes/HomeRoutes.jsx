@@ -6,7 +6,7 @@ import AssociationPage from "../pages/associationPage/AssociationPage";
 import AssociationPage2 from "../pages/associationPage/AssociationEtape2";
 import LoginPage from "../pages/loginPage/LoginPage";
 import WelcomePage from "../pages/welcome/WelcomePage";
-import HomePage from "../pages/homePage/homePage";
+import Events from "../pages/homePage/Events";
 
 import FinalisationInscription from "../pages/candidatePage/FinalisationInscription";
 import FeedUser from "../pages/feedPage/FeedUser";
@@ -28,7 +28,7 @@ const HomeRoutes = () => {
       <Route path="/association2" element={<AssociationPage2 />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/Welcome" element={<WelcomePage />} />
-      <Route path="/home" element={<HomePage />} />
+      <Route path="/events" element={<Events />} />
       <Route path="/feedUser" element={<FeedUser />} />
       <Route path="/feedAsso" element={<FeedAsso />} />
       <Route path="/param" element={<Parametre />} />

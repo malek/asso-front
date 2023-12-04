@@ -1,8 +1,11 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Row, Col } from "react-bootstrap";
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import BeautifulCards from "../../components/card/BeautifulCards";
+import CardForm from "../../components/cardForm/cardForm";
+import { Form, FormControl, Button } from "react-bootstrap";
+
+import "../../assets/cardsImages/EventsPageStyles.css"; // Assurez-vous que le chemin est correct
 
 import wavyDiv from "../../assets/feedImages/wavy.svg";
 
@@ -12,11 +15,18 @@ import messagerieIcon from "../../assets/feedImages/iconsNavBar/messagerieIcon.s
 import settingsIcon from "../../assets/feedImages/iconsNavBar/settingsIcon.svg";
 import eventsIcon from "../../assets/feedImages/iconsNavBar/eventsIcon.svg";
 
-const Parametre = () => {
-  const [buttonClicked, setButtonClicked] = useState(false);
-
+const Events = () => {
+  const [showForm, setShowForm] = useState(false);
+  const formRef = useRef(null); // Ajoutez une référence ici
   //For the navBar btns
-  const [activeButton, setActiveButton] = useState("settings");
+  const [activeButton, setActiveButton] = useState("events");
+
+  const handleAddClick = () => {
+    setShowForm(true); // Afficher le formulaire
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
 
   const handleNavButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -57,37 +67,6 @@ const Parametre = () => {
     //border: "none", // Added as per your requirement
     borderRadius: "15px",
   };
-
-  const rowStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
-
-  const buttonStyle = {
-    backgroundColor: "#8675AA",
-    padding: "3% 10% 3% 10% ",
-    textDecoration: "none",
-    color: "white",
-    cursor: "pointer",
-    fontFamily: "SuperTea",
-    borderRadius: "15px",
-    //marginTop: "5%",
-  };
-  const deleteButtonStyle = {
-    backgroundColor: buttonClicked ? "#A7283E" : "#8675AA",
-    padding: "3% 10% 3% 10%",
-    textDecoration: "none",
-    color: "white",
-    cursor: "pointer",
-    fontFamily: "SuperTea",
-    borderRadius: "15px",
-  };
-
-  const handleButtonClick = () => {
-    setButtonClicked(true);
-  };
-
   const divButtomNavBar = {
     backgroundColor: "#8675AA",
     borderRadius: "15px 15px 0 0",
@@ -98,6 +77,7 @@ const Parametre = () => {
     padding: "2%",
     zIndex: 10, // You can adjust the z-index as needed
   };
+
   return (
     <div>
       <Row>
@@ -108,122 +88,34 @@ const Parametre = () => {
               className="d-flex flex-column align-items-center mb-5 mt-5"
               style={textStyle}
             >
-              <p
-                className="fs-2"
-                style={{ letterSpacing: "2px", marginRight: "-20%" }}
-              >
-                PARAMÈTRES
+              <p className="fs-1 " style={{ letterSpacing: "2px" }}>
+                Events
               </p>
-
               <div className="col-10">
                 <form style={styleForm} className="nosubmit">
                   <input
                     style={styleInput}
                     className="nosubmit"
                     type="search"
-                    placeholder="Chercher un paramètre, mot clé..."
+                    placeholder="Chercher une association, mot clé..."
                   />
                 </form>
               </div>
             </div>
           </Row>
         </div>
-
-        <div className="d-flex flex-column align-items-center mb-5 mt-2">
-          <Row className="col-10 mt-2" style={rowStyle}>
-            <button style={buttonStyle}>
-              <Link
-                to="/"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontSize: " 1.5rem",
-                  letterSpacing: "2px",
-                }}
-              >
-                NOTIFICATIONS
-              </Link>
-            </button>
-          </Row>
-          <Row className="col-10 mt-5" style={rowStyle}>
-            <button style={buttonStyle}>
-              <Link
-                to="/"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontSize: " 1.5rem",
-                  letterSpacing: "2px",
-                }}
-              >
-                MODIFIER PROFIL
-              </Link>
-            </button>
-          </Row>
-          <Row className="col-10 mt-5" style={rowStyle}>
-            <button style={buttonStyle}>
-              <Link
-                to="/"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontSize: " 1.5rem",
-                  letterSpacing: "2px",
-                }}
-              >
-                ACCESSIBILITÉ
-              </Link>
-            </button>
-          </Row>
-          <Row className="col-10 mt-5" style={rowStyle}>
-            <button style={buttonStyle}>
-              <Link
-                to="/"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontSize: " 1.5rem",
-                  letterSpacing: "2px",
-                }}
-              >
-                CONFIDENTIALITÉ
-              </Link>
-            </button>
-          </Row>
-          <Row className="col-10 mt-5" style={rowStyle}>
-            <button style={buttonStyle}>
-              <Link
-                to="/"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontSize: " 1.5rem",
-                  letterSpacing: "2px",
-                }}
-              >
-                CONTACT ASSOSHARE
-              </Link>
-            </button>
-          </Row>
-          <Row className="col-10 mt-5" style={rowStyle}>
-            <button style={deleteButtonStyle}>
-              <Link
-                to=""
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  fontSize: " 1.5rem",
-                  letterSpacing: "2px",
-                }}
-                onClick={handleButtonClick}
-              >
-                SUPPRIMER MON COMPTE
-              </Link>
-            </button>
-          </Row>
+        <BeautifulCards /> {/* Ajout des cartes statiques */}
+        <div className="d-flex flex-column align-items-center mb-5 mt-5">
+          <button onClick={handleAddClick} style={buttonStyle}>
+            Ajouter un événement
+          </button>
+          {showForm && (
+            <div ref={formRef}>
+              <CardForm />
+            </div>
+          )}
         </div>
       </Row>
-
       <div style={divButtomNavBar} className="align-items-center ">
         <Row
           style={{
@@ -251,12 +143,11 @@ const Parametre = () => {
               <Button
                 style={{
                   border: "none",
-                  backgroundColor:
-                    activeButton === "events" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "events" ? "#E5D2EC" : "",
                 }}
                 onClick={() => handleNavButtonClick("events")}
               >
-                <img src={eventsIcon} alt="notification" />
+                <img src={eventsIcon} alt="events" />
               </Button>
             </Link>
           </Col>
@@ -292,5 +183,15 @@ const Parametre = () => {
     </div>
   );
 };
+export default Events;
 
-export default Parametre;
+const buttonStyle = {
+  backgroundColor: "#8675AA",
+  padding: "3% 10% 3% 10% ",
+  textDecoration: "none",
+  color: "white",
+  cursor: "pointer",
+  fontFamily: "SuperTea",
+  borderRadius: "15px",
+  //marginTop: "5%",
+};
