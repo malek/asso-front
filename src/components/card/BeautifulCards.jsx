@@ -40,6 +40,10 @@ const cardStyle = {
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   margin: '10px',
   overflow: 'hidden',
+  width: '348px',
+  height: '327px',
+  borderRadius: '20px',
+  background: '#FCFCFC'
 };
 
 const imageStyle = {

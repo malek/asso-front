@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-
 import purpleButtomFlowers from "../../assets/inscription/purpleButtomFlowers.svg";
 const CandidatePage = () => {
   // const history = useHistory();
