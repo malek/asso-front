@@ -18,7 +18,7 @@ import etoilesIcon from "../../assets/feedImages/badges/autre/etoiles.svg";
 import monProfilIcon from "../../assets/feedImages/iconsNavBar/monProfilIcon.svg";
 import messagerieIcon from "../../assets/feedImages/iconsNavBar/messagerieIcon.svg";
 import settingsIcon from "../../assets/feedImages/iconsNavBar/settingsIcon.svg";
-import notificationsIcon from "../../assets/feedImages/iconsNavBar/notificationsIcon.svg";
+import eventsIcon from "../../assets/feedImages/iconsNavBar/eventsIcon.svg";
 
 //badges Incons
 import oiseauNocturne from "../../assets/feedImages/badges/oiseauNocturne.svg";
@@ -527,11 +527,11 @@ const FeedAsso = () => {
                 style={{
                   border: "none",
                   backgroundColor:
-                    activeButton === "notifications" ? "#E5D2EC" : "",
+                    activeButton === "events" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("notifications")}
+                onClick={() => handleNavButtonClick("events")}
               >
-                <img src={notificationsIcon} alt="notification" />
+                <img src={eventsIcon} alt="events" />
               </Button>
             </Link>
           </Col>

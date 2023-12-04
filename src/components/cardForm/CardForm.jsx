@@ -16,6 +16,7 @@ const CardForm = () => {
     maxWidth: '400px', 
     margin: '0 auto',
     padding: '10px',
+    
   };
   
   const formGroupStyle = {
@@ -26,16 +27,22 @@ const CardForm = () => {
     width: '100%', 
     padding: '8px',
     border: '1px solid #ccc',
-    borderRadius: '4px',
+    borderRadius: '15px',
   };
   
   const buttonStyle = {
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '4px',
-    backgroundColor: '#7C048E',
-    color: 'white',
-    cursor: 'pointer',
+
+
+    backgroundColor: "#7C048E",
+    padding: "3% 10% 3% 10% ",
+    textDecoration: "none",
+    color: "white",
+    cursor: "pointer",
+    fontFamily: "SuperTea",
+    borderRadius: "15px",
+
+    
+  
   };
   const handleSubmit = async (event) => {
     event.preventDefault();

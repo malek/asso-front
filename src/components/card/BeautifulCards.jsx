@@ -1,13 +1,15 @@
-import React from 'react';
-import img1 from '../../assets/StaticCrads/img1.jpg';
+import React from "react";
+import { Row, Col } from "react-bootstrap";
+import { Button, ButtonGroup } from "react-bootstrap";
 
-import img2 from '../../assets/StaticCrads/img2.jpg';
-import img3 from '../../assets/StaticCrads/img3.jpeg';
-
-import img4 from '../../assets/StaticCrads/img4.png';
-
-
-
+//import img1 from '../../assets/StaticCrads/img1.jpg';
+// import img2 from '../../assets/StaticCrads/img2.jpg';
+// import img3 from '../../assets/StaticCrads/img3.jpeg';
+// import img4 from '../../assets/StaticCrads/img4.png';
+import img1 from "../../assets/StaticCrads/img1.svg";
+import img2 from "../../assets/StaticCrads/img2.svg";
+import img3 from "../../assets/StaticCrads/img3.svg";
+import img4 from "../../assets/StaticCrads/img4.svg";
 const BeautifulCards = () => {
   return (
     <div style={cardsContainerStyle}>
@@ -16,6 +18,30 @@ const BeautifulCards = () => {
           <img src={card.image} alt={card.title} style={imageStyle} />
           <div style={cardContentStyle}>
             <h3 style={cardTitleStyle}>{card.title}</h3>
+            <Row className="justify-content-center">
+              <Col>
+              {card.infos.map((info, index) => (
+                <React.Fragment key={index}>
+                  <Button
+                    onClick={() => {}}
+                    className="mb-2"
+                    style={{
+                      backgroundColor: "#8675AA",
+                      color: "white",
+                      borderRadius: "15px",
+                      margin: "2px",
+                      border: "none",
+                      padding: "1% 3% 1% 3%",
+                      fontSize: "0.8rem",
+                    }}
+                  >
+                    {info}
+                  </Button>{" "}
+                </React.Fragment>
+              ))}
+              </Col>
+              
+            </Row>
             <p style={cardDescriptionStyle}>{card.description}</p>
           </div>
         </div>
@@ -25,66 +51,77 @@ const BeautifulCards = () => {
 };
 
 const cardsContainerStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'space-around',
-  padding: '10px',
-  maxWidth: '400px',
-  margin: 'auto',
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "space-around",
+  padding: "10px",
+  width: "90%",
+  margin: "auto",
 };
 
 const cardStyle = {
-  backgroundColor: '#fff',
-  borderRadius: '8px',
-  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  margin: '10px',
-  overflow: 'hidden',
-  width: '348px',
-  height: '327px',
-  borderRadius: '20px',
-  background: '#FCFCFC'
+  backgroundColor: "#fff",
+  borderRadius: "8px",
+  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+  margin: "10px",
+  overflow: "hidden",
+  width: "100%",
+  height: "40%",
+  borderRadius: "15px",
+  background: "#FCFCFC",
 };
 
 const imageStyle = {
-  width: '100%',
-  height: '200px',
-  objectFit: 'cover',
+  width: "100%",
+  //height: '100%',
+  objectFit: "cover",
 };
 
 const cardContentStyle = {
-  padding: '15px',
+  padding: "15px",
 };
 
 const cardTitleStyle = {
-  margin: '0 0 10px 0',
-  color: '#333',
+  margin: "0 0 10px 0",
+  color: "#303030",
+  fontFamily: "'SuperTea', sans-serif",
+  fontSize: "1.1rem",
 };
 
 const cardDescriptionStyle = {
   margin: 0,
-  color: '#666',
+  color: "black",
+  fontSize: "0.8rem",
 };
 
 const cardData = [
   {
-    title: 'Carte 1',
-    description: 'Description de la carte 1',
+    title: "ATELIER CRÉATIF PEINTURE !",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    infos: ["Loisir / Culture", "Lyon 7ème"],
     image: img1,
   },
   {
-    title: 'Carte 2',
-    description: 'Description de la carte 2',
+    title: "BUVETTE POUR LES ANIMAUX",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    infos: ["Animaux", "Villeurbanne"],
     image: img2,
   },
   {
-    title: 'Carte 3',
-    description: 'Description de la carte 3',
+    title: "ANIMATION KARAOKÉ AVEC AINÉS",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    infos: ["Social", "Santé", "Lyon 6ème"],
     image: img3,
   },
   {
-    title: 'Carte 4',
-    description: 'Description de la carte 4',
+    title: "REPAS CLUB DE FOOT POUSSINS",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    infos: ["Social", "Lyon 6ème"],
     image: img4,
   },
 ];
