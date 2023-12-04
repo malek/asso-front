@@ -197,7 +197,7 @@ const Parametre = () => {
                 style={{
                   color: "white",
                   textDecoration: "none",
-                  fontSize: " 1.5rem",
+                  fontSize: " 1.3rem",
                   letterSpacing: "2px",
                 }}
               >
@@ -212,7 +212,7 @@ const Parametre = () => {
                 style={{
                   color: "white",
                   textDecoration: "none",
-                  fontSize: " 1.5rem",
+                  fontSize: " 1.2rem",
                   letterSpacing: "2px",
                 }}
                 onClick={handleButtonClick}
