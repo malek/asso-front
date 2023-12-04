@@ -86,9 +86,9 @@ const Landing = () => {
       password: "123456",
     };
     if (email === userData.email && password === userData.password) {
-      navigate('/home');
+      navigate('/events');
     } else if (email === AssoData.email && password === AssoData.password) {
-      navigate('/home');
+      navigate('/events');
     } else {
       alert('Incorrect username or password');
     }
