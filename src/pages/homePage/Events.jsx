@@ -105,7 +105,7 @@ const Events = () => {
           </Row>
         </div>
         <div className="d-flex flex-column align-items-center mt-1">
-          <Link to={"/"} style={buttonStyle}>
+          <Link to={"/map"} style={buttonStyle}>
             <button onClick={handleAddClick} >
               Ouvrir carte
             </button>
@@ -131,7 +131,7 @@ const Events = () => {
           }}
         >
           <Col>
-            <Link to="/">
+            <Link to="/feedUser">
               <Button
                 style={{
                   border: "none",
