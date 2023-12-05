@@ -14,6 +14,8 @@ import FeedAsso from "../pages/feedPage/FeedAsso";
 import Parametre from "../pages/navBarPages/Parametre";
 import Messagerie from "../pages/navBarPages/Messagerie";
 import MessagerieChat from "../pages/navBarPages/MessagerieChat";
+import MapPage from "../pages/feedPage/MapPage";
+//import MapTest from "../pages/feedPage/MapPage";
 const HomeRoutes = () => {
   return (
     <Routes>
@@ -34,6 +36,7 @@ const HomeRoutes = () => {
       <Route path="/param" element={<Parametre />} />
       <Route path="/messagerie" element={<Messagerie />} />
       <Route path="/messagerieChat" element={<MessagerieChat />} />
+      <Route path="/map" element={<MapPage />} />
     </Routes>
   );
 };
