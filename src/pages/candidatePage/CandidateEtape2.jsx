@@ -122,6 +122,8 @@ const CandidatePage2 = () => {
     };
     ajouterUtilisateur(finalUserData);
     console.log("Données finales soumises:", finalUserData); // Afficher dans la console
+    const isAsso = false; // To send it to finalisation page so it can send it to desplay feed asso
+    window.location.href = `/finalisationInscription?param=${isAsso}`;
     navigate("/finalisationInscription");
   };
   const ajouterUtilisateur = async (finalUserData) => {

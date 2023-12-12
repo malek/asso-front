@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Button, ButtonGroup } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
+import { Link } from "react-router-dom";
 
 import addAvatar from "../../assets/inscription/addPicture.svg";
 import purpleButtomFlowers from "../../assets/inscription/purpleButtomFlowers.svg";
@@ -116,6 +117,8 @@ const AssociationPage2 = () => {
       ajouterAsso(finalUserDataAsso);
       console.log("Données finales soumises:", finalUserDataAsso); // Afficher dans la console
       navigate("/finalisationInscription");
+      const isAsso = true; // To send it to finalisation page so it can send it to desplay feed asso
+      window.location.href = `/finalisationInscription?param=${isAsso}`;
     } catch (error) {
       console.error("Erreur lors de l'envoi du formulaire :", error);
       // Gérer l'erreur, par exemple en affichant un message d'erreur
@@ -398,35 +401,37 @@ const AssociationPage2 = () => {
               </div>
             </Row>
             <Row>
-              <div
-                className="col-12"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                {formIsValid ? (
-                  <button
-                    type="submit"
-                    style={buttonStyle}
-                    disabled={!formIsValid}
-                    onClick={handleSubmit}
-                  >
-                    VALIDATION
-                  </button>
-                ) : (
-                  <span
-                    style={{
-                      ...buttonStyle,
-                      pointerEvents: "none",
-                      opacity: 0.5,
-                    }}
-                  >
-                    VALIDATION
-                  </span>
-                )}
-              </div>
+              <Link>
+                <div
+                  className="col-12"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {formIsValid ? (
+                    <button
+                      type="submit"
+                      style={buttonStyle}
+                      disabled={!formIsValid}
+                      onClick={handleSubmit}
+                    >
+                      VALIDATION
+                    </button>
+                  ) : (
+                    <span
+                      style={{
+                        ...buttonStyle,
+                        pointerEvents: "none",
+                        opacity: 0.5,
+                      }}
+                    >
+                      VALIDATION
+                    </span>
+                  )}
+                </div>
+              </Link>
             </Row>
           </form>
         </div>

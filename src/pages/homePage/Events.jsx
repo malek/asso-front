@@ -1,10 +1,9 @@
 import React, { useState, useRef } from "react";
 import { Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import BeautifulCards from "../../components/card/BeautifulCards";
 import CardForm from "../../components/cardForm/cardForm";
 import { Button } from "react-bootstrap";
-
 import "../../assets/cardsImages/EventsPageStyles.css"; // Assurez-vous que le chemin est correct
 
 import wavyDiv from "../../assets/feedImages/wavy.svg";
@@ -20,6 +19,10 @@ const Events = () => {
   const formRef = useRef(null); // Ajoutez une référence ici
   //For the navBar btns
   const [activeButton, setActiveButton] = useState("events");
+
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isTrue = params.get("param") === "true";
 
   const handleAddClick = () => {
     setShowForm(true); // Afficher le formulaire
@@ -106,21 +109,30 @@ const Events = () => {
         </div>
         <div className="d-flex flex-column align-items-center mt-1">
           <Link to={"/map"} style={buttonStyle}>
-            <button onClick={handleAddClick} >
-              Ouvrir carte
-            </button>
+            <button onClick={handleAddClick}>Ouvrir carte</button>
           </Link>
         </div>
         <BeautifulCards /> {/* Ajout des cartes statiques */}
         <div className="d-flex flex-column align-items-center mb-5 mt-5">
-          <button onClick={handleAddClick} style={buttonStyle}>
-            Ajouter un événement
-          </button>
-          {showForm && (
+          {isTrue ? (
+            <button onClick={handleAddClick} style={buttonStyle}>
+              <Link
+                to="/addEvent"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  fontSize: "1rem",
+                }}
+              >
+                Ajouter un événement
+              </Link>
+            </button>
+          ) : null}
+          {/* {showForm && (
             <div ref={formRef}>
               <CardForm />
             </div>
-          )}
+          )} */}
         </div>
       </Row>
       <div style={divButtomNavBar} className="align-items-center ">
@@ -131,18 +143,33 @@ const Events = () => {
           }}
         >
           <Col>
-            <Link to="/feedUser">
-              <Button
-                style={{
-                  border: "none",
-                  backgroundColor:
-                    activeButton === "monProfil" ? "#E5D2EC" : "",
-                }}
-                onClick={() => handleNavButtonClick("monProfil")}
-              >
-                <img src={monProfilIcon} alt="monProfil" />
-              </Button>
-            </Link>
+            {isTrue ? (
+              <Link to="/feedAsso">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "monProfil" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("events")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/feedUser">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "monProfil" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("monProfil")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            )}
           </Col>
 
           <Col>
