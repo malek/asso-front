@@ -4,6 +4,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+
 import L from "leaflet";
 //nav pictures
 import monProfilIcon from "../../assets/feedImages/iconsNavBar/monProfilIcon.svg";
@@ -13,6 +15,13 @@ import eventsIcon from "../../assets/feedImages/iconsNavBar/eventsIcon.svg";
 
 import "./home.css";
 import markerIcon from "../../assets/mapIcons/marker.svg";
+
+//assos pictures
+import a from "../../assets/cardAssoImages/one.svg";
+import b from "../../assets/cardAssoImages/two.svg";
+import c from "../../assets/cardAssoImages/three.svg";
+import d from "../../assets/cardAssoImages/four.svg";
+import e from "../../assets/cardAssoImages/five.svg";
 const purpleMarker = new L.Icon({
   iconUrl: markerIcon,
   iconSize: [25, 41],
@@ -31,6 +40,8 @@ const listeAssos = [
     Ville: "Lyon",
     Latitude: 45.7498956,
     Longitude: 4.8109887,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: a,
   },
   {
     Nom: "Atout délice",
@@ -38,13 +49,18 @@ const listeAssos = [
     Ville: "Lyon",
     Latitude: 45.7687569,
     Longitude: 4.8355748,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: b,
   },
   {
     Nom: "La Niaque l'Asso",
     Adresse: "28, rue Denfert Rochereau",
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     Ville: "Lyon",
     Latitude: 45.7754218449053,
     Longitude: 4.825128296473021,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: c,
   },
   {
     Nom: "Le Cocon",
@@ -52,6 +68,8 @@ const listeAssos = [
     Ville: "Lyon",
     Latitude: 45.754287918005645,
     Longitude: 4.866902564193426,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: d,
   },
   {
     Nom: "Action Jeunesse Citoyenneté",
@@ -59,6 +77,8 @@ const listeAssos = [
     Ville: "Lyon",
     Latitude: 45.757189167120906,
     Longitude: 4.782942581127733,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: e,
   },
   {
     Nom: "Connect orientation",
@@ -66,6 +86,8 @@ const listeAssos = [
     Ville: "Lyon",
     Latitude: 45.77112374491159,
     Longitude: 4.853046143307122,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: a,
   },
   {
     Nom: "Association OKOUABO",
@@ -73,6 +95,8 @@ const listeAssos = [
     Ville: "Lyon",
     Latitude: 45.794943509175305,
     Longitude: 4.829563862564668,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: b,
   },
   {
     Nom: "Les chats de Loyasse",
@@ -80,6 +104,8 @@ const listeAssos = [
     Ville: "Lyon",
     Latitude: 45.75961477795646,
     Longitude: 4.8135737797629226,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: c,
   },
   {
     Nom: "ADERLY",
@@ -87,6 +113,8 @@ const listeAssos = [
     Ville: "Lyon",
     Latitude: 45.7647826127203,
     Longitude: 4.836024662564667,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: d,
   },
   {
     Nom: "Etilesum",
@@ -94,6 +122,8 @@ const listeAssos = [
     Ville: "Lyon",
     Latitude: 45.731794622861536,
     Longitude: 4.8572643644181035,
+    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    Image: e,
   },
 ];
 
@@ -170,7 +200,8 @@ const MapPage = () => {
   const cardData = listeAssos.map((asso) => {
     return {
       title: asso.Nom,
-      description: `${asso.Adresse} ${asso.Ville}`,
+      description: `${asso.Desc} ${asso.Adresse} ${asso.Ville}`,
+      image: asso.Image,
     };
   });
 
@@ -184,10 +215,24 @@ const MapPage = () => {
       >
         <Popup>
           {
-            <div style={cardContentStyle}>
-              <h2 style={cardTitleStyle}>{cardData[index].title}</h2>
-              <p style={cardDescriptionStyle}>{cardData[index].description}</p>
-            </div>
+            <Link to="">
+              <Card style={{ width: "18rem", borderRadius: "15px" }}>
+                <Card.Img variant="top" src={cardData[index].image} />
+                <Card.Body>
+                  <Card.Title style={cardTitleStyle}>
+                    {cardData[index].title}
+                  </Card.Title>
+                  <Card.Text style={cardDescriptionStyle}>
+                    {cardData[index].description}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Link>
+
+            // <div style={cardContentStyle}>
+            //   <h2 style={cardTitleStyle}>{cardData[index].title}</h2>
+            //   <p style={cardDescriptionStyle}>{cardData[index].description}</p>
+            // </div>
           }
         </Popup>
       </Marker>
