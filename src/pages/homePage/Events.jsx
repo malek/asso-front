@@ -22,16 +22,11 @@ const Events = () => {
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const isTrue = params.get("param") === "true";
+  const isAsso = params.get("param") === "true";
 
-  const handleAddClick = () => {
-    setShowForm(true); // Afficher le formulaire
-    setTimeout(() => {
-      formRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  };
-
+ 
   const handleNavButtonClick = (buttonName) => {
+    window.location.href = `/${buttonName}?param=${isAsso}`;
     setActiveButton(buttonName);
   };
 
@@ -108,16 +103,16 @@ const Events = () => {
           </Row>
         </div>
         <div className="d-flex flex-column align-items-center mt-1">
-          <Link to={"/map"} style={buttonStyle}>
-            <button onClick={handleAddClick}>Ouvrir carte</button>
+          <Link to={""} style={buttonStyle}>
+            <button  onClick={() => handleNavButtonClick("map")}>Ouvrir carte</button>
           </Link>
         </div>
         <BeautifulCards /> {/* Ajout des cartes statiques */}
         <div className="d-flex flex-column align-items-center mb-5 mt-5">
-          {isTrue ? (
-            <button onClick={handleAddClick} style={buttonStyle}>
+          {isAsso ? (
+            <button  onClick={() => handleNavButtonClick("addEvent")}style={buttonStyle}>
               <Link
-                to="/addEvent"
+                to=""
                 style={{
                   color: "white",
                   textDecoration: "none",
@@ -143,15 +138,15 @@ const Events = () => {
           }}
         >
           <Col>
-            {isTrue ? (
+            {isAsso ? (
               <Link to="/feedAsso">
                 <Button
                   style={{
                     border: "none",
                     backgroundColor:
-                      activeButton === "monProfil" ? "#E5D2EC" : "",
+                      activeButton === "feedAsso" ? "#E5D2EC" : "",
                   }}
-                  onClick={() => handleNavButtonClick("events")}
+                  onClick={() => handleNavButtonClick("feedAsso")}
                 >
                   <img src={monProfilIcon} alt="monProfil" />
                 </Button>
@@ -162,9 +157,9 @@ const Events = () => {
                   style={{
                     border: "none",
                     backgroundColor:
-                      activeButton === "monProfil" ? "#E5D2EC" : "",
+                      activeButton === "feedUser" ? "#E5D2EC" : "",
                   }}
-                  onClick={() => handleNavButtonClick("monProfil")}
+                  onClick={() => handleNavButtonClick("feedUser")}
                 >
                   <img src={monProfilIcon} alt="monProfil" />
                 </Button>
@@ -173,7 +168,7 @@ const Events = () => {
           </Col>
 
           <Col>
-            <Link to="/events">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -186,7 +181,7 @@ const Events = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/messagerie">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -200,13 +195,13 @@ const Events = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/param">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
-                  backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "param" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("settings")}
+                onClick={() => handleNavButtonClick("param")}
               >
                 <img src={settingsIcon} alt="settings" />
               </Button>

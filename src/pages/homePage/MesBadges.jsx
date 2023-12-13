@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 import wavyDiv from "../../assets/feedImages/wavy.svg";
@@ -23,8 +23,14 @@ import bavard from "../../assets/feedImages/badges/bavard.svg";
 import chat from "../../assets/feedImages/badges/chat.svg";
 
 const MesBadges = () => {
-  const [activeButton, setActiveButton] = useState("monProfil");
+  const [activeButton, setActiveButton] = useState("");
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isAsso = params.get("param") === "true";
+
   const handleNavButtonClick = (buttonName) => {
+    window.location.href = `/${buttonName}?param=${isAsso}`;
+
     setActiveButton(buttonName);
   };
 
@@ -276,7 +282,7 @@ const MesBadges = () => {
               >
                 <button style={titreButtonStyle}>
                   <Link
-                    to="/"
+                    to=""
                     style={{ color: "white", textDecoration: "none" }}
                   >
                     SÉLECTIONNER D'AUTRES BADGES
@@ -296,22 +302,37 @@ const MesBadges = () => {
           }}
         >
           <Col>
-            <Link to="/feedAsso">
-              <Button
-                style={{
-                  border: "none",
-                  backgroundColor:
-                    activeButton === "monProfil" ? "#E5D2EC" : "",
-                }}
-                onClick={() => handleNavButtonClick("monProfil")}
-              >
-                <img src={monProfilIcon} alt="monProfil" />
-              </Button>
-            </Link>
+          {isAsso ? (
+              <Link to="/feedAsso">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "feedAsso" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("feedAsso")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/feedUser">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "feedUser" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("feedUser")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            )}
           </Col>
 
           <Col>
-            <Link to="/events">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -324,7 +345,7 @@ const MesBadges = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/messagerie">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -338,13 +359,13 @@ const MesBadges = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/param">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
-                  backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "param" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("settings")}
+                onClick={() => handleNavButtonClick("param")}
               >
                 <img src={settingsIcon} alt="settings" />
               </Button>

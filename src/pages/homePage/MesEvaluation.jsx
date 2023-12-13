@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 import wavyDiv from "../../assets/feedImages/wavy.svg";
 import Avatar from "../feedPage/Avatar";
-import userAvatar from "../../assets/feedImages/usersPic/associationPicture.jpg";
+import userAvatarPic from "../../assets/feedImages/usersPic/saif.jpeg";
 import etoilesIcon from "../../assets/feedImages/badges/autre/etoiles.svg";
 
 
@@ -18,8 +18,14 @@ import eventsIcon from "../../assets/feedImages/iconsNavBar/eventsIcon.svg";
 
 const MesEvaluation = () => {
   const [activeButton, setActiveButton] = useState("");
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isAsso = params.get("param") === "true";
 
+ 
   const handleNavButtonClick = (buttonName) => {
+    window.location.href = `/${buttonName}?param=${isAsso}`;
+
     setActiveButton(buttonName);
   };
 
@@ -77,7 +83,7 @@ const MesEvaluation = () => {
       <Row className=" d-flex flex-column align-items-center mb-5 mt-2">
         <Card style={{ width: "22rem", borderRadius: "15px" }}>
           <div className=" d-flex flex-column align-items-center mb-1 mt-1">
-            <Avatar imageName={userAvatar} />
+            <Avatar imageName={userAvatarPic} />
           </div>
           <div className=" d-flex flex-column align-items-start mb-1 mt-1">
             <p
@@ -87,7 +93,7 @@ const MesEvaluation = () => {
               Saif - bénévole
             </p>
             <p style={{ fontSize: "1.4rem", fontWeight: "bold" }}>
-              Équipe trè chaleureuse, je suis ravie !
+              Équipe très chaleureuse, je suis ravi !
             </p>
           </div>
           <div className=" d-flex flex-column align-items-start mb-1 mt-2">
@@ -110,22 +116,37 @@ const MesEvaluation = () => {
           }}
         >
           <Col>
-            <Link to="/">
-              <Button
-                style={{
-                  border: "none",
-                  backgroundColor:
-                    activeButton === "monProfil" ? "#E5D2EC" : "",
-                }}
-                onClick={() => handleNavButtonClick("monProfil")}
-              >
-                <img src={monProfilIcon} alt="monProfil" />
-              </Button>
-            </Link>
+          {isAsso ? (
+              <Link to="/feedAsso">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "feedAsso" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("feedAsso")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/feedUser">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "feedUser" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("feedUser")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            )}
           </Col>
 
           <Col>
-            <Link to="/events">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -138,7 +159,7 @@ const MesEvaluation = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/messagerie">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -152,13 +173,13 @@ const MesEvaluation = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/param">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
-                  backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "param" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("settings")}
+                onClick={() => handleNavButtonClick("param")}
               >
                 <img src={settingsIcon} alt="settings" />
               </Button>

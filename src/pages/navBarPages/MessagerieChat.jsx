@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import Avatar from "../feedPage/Avatar";
 
@@ -20,8 +20,13 @@ const MessagerieChat = () => {
 
   //For the navBar btns
   const [activeButton, setActiveButton] = useState("messagerie");
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isAsso = params.get("param") === "true";
 
   const handleNavButtonClick = (buttonName) => {
+    window.location.href = `/${buttonName}?param=${isAsso}`;
+
     setActiveButton(buttonName);
   };
 
@@ -134,10 +139,7 @@ const MessagerieChat = () => {
           </Row>
         </div>
 
-        <div
-          style={msgHistoriqueDivStyle}
-          className=" mt-3"
-        >
+        <div style={msgHistoriqueDivStyle} className=" mt-3">
           <div
             className=" d-flex flex-column align-items-center"
             //style={{ width: "100%" }}
@@ -182,22 +184,37 @@ const MessagerieChat = () => {
           }}
         >
           <Col>
-            <Link to="/">
-              <Button
-                style={{
-                  border: "none",
-                  backgroundColor:
-                    activeButton === "monProfil" ? "#E5D2EC" : "",
-                }}
-                onClick={() => handleNavButtonClick("monProfil")}
-              >
-                <img src={monProfilIcon} alt="monProfil" />
-              </Button>
-            </Link>
+            {isAsso ? (
+              <Link to="/feedAsso">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "feedAsso" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("feedAsso")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/feedUser">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "feedUser" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("feedUser")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            )}
           </Col>
 
           <Col>
-            <Link to="/">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -210,7 +227,7 @@ const MessagerieChat = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/messagerie">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -224,13 +241,13 @@ const MessagerieChat = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/param">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
-                  backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "param" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("settings")}
+                onClick={() => handleNavButtonClick("param")}
               >
                 <img src={settingsIcon} alt="settings" />
               </Button>

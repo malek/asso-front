@@ -85,8 +85,12 @@ const Landing = () => {
       password: "123456",
     };
     if (email === userData.email && password === userData.password) {
+      const isAsso = false; // To send it to finalisation page so it can send it to desplay feed asso
+      window.location.href = `/feedUser?param=${isAsso}`;
       navigate("/feedUser");
     } else if (email === AssoData.email && password === AssoData.password) {
+      const isAsso = true; // To send it to finalisation page so it can send it to desplay feed asso
+      window.location.href = `/feedAsso?param=${isAsso}`;
       navigate("/feedAsso");
     } else {
       alert("Incorrect username or password");

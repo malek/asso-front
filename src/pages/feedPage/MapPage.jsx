@@ -1,7 +1,7 @@
 import wavyDiv from "../../assets/feedImages/wavy.svg";
 import { Row, Col } from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
@@ -139,8 +139,14 @@ for (const [index, asso] of listeAssos.entries()) {
 }
 
 const MapPage = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isAsso = params.get("param") === "true";
+
   const [activeButton, setActiveButton] = useState(null);
   const handleNavButtonClick = (buttonName) => {
+    window.location.href = `/${buttonName}?param=${isAsso}`;
+
     setActiveButton(buttonName);
   };
 
@@ -304,14 +310,14 @@ const MapPage = () => {
           }}
         >
           <Col>
-            <Link to="/feedAsso">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
                   backgroundColor:
-                    activeButton === "monProfil" ? "#E5D2EC" : "",
+                    activeButton === "feedAsso" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("monProfil")}
+                onClick={() => handleNavButtonClick("feedAsso")}
               >
                 <img src={monProfilIcon} alt="monProfil" />
               </Button>
@@ -319,7 +325,7 @@ const MapPage = () => {
           </Col>
 
           <Col>
-            <Link to="/events">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -332,7 +338,7 @@ const MapPage = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/messagerie">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -346,13 +352,13 @@ const MapPage = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/param">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
-                  backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "param" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("settings")}
+                onClick={() => handleNavButtonClick("param")}
               >
                 <img src={settingsIcon} alt="settings" />
               </Button>

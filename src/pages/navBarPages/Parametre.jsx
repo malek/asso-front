@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import wavyDiv from "../../assets/feedImages/wavy.svg";
 
@@ -16,11 +16,19 @@ const Parametre = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
 
   //For the navBar btns
-  const [activeButton, setActiveButton] = useState("settings");
+  const [activeButton, setActiveButton] = useState("param");
+
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isAsso = params.get("param") === "true";
 
   const handleNavButtonClick = (buttonName) => {
+    window.location.href = `/${buttonName}?param=${isAsso}`;
     setActiveButton(buttonName);
   };
+
+  //for the confirmation delete btn
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const containerStyle = {
     position: "relative",
@@ -75,7 +83,7 @@ const Parametre = () => {
     //marginTop: "5%",
   };
   const deleteButtonStyle = {
-    backgroundColor: buttonClicked ? "#A7283E" : "#8675AA",
+    backgroundColor: "#A7283E",
     padding: "3% 10% 3% 10%",
     textDecoration: "none",
     color: "white",
@@ -85,6 +93,12 @@ const Parametre = () => {
   };
 
   const handleButtonClick = () => {
+    const confirmDelete = window.confirm(
+      "Vous voulez Vraiment nous quitter? \n :("
+    );
+    if (confirmDelete) {
+      window.location.href = '/'
+    }
     setButtonClicked(true);
   };
 
@@ -133,7 +147,7 @@ const Parametre = () => {
           <Row className="col-10 mt-2" style={rowStyle}>
             <button style={buttonStyle}>
               <Link
-                to="/"
+                to=""
                 style={{
                   color: "white",
                   textDecoration: "none",
@@ -148,7 +162,7 @@ const Parametre = () => {
           <Row className="col-10 mt-5" style={rowStyle}>
             <button style={buttonStyle}>
               <Link
-                to="/"
+                to=""
                 style={{
                   color: "white",
                   textDecoration: "none",
@@ -163,7 +177,7 @@ const Parametre = () => {
           <Row className="col-10 mt-5" style={rowStyle}>
             <button style={buttonStyle}>
               <Link
-                to="/"
+                to=""
                 style={{
                   color: "white",
                   textDecoration: "none",
@@ -178,7 +192,7 @@ const Parametre = () => {
           <Row className="col-10 mt-5" style={rowStyle}>
             <button style={buttonStyle}>
               <Link
-                to="/"
+                to=""
                 style={{
                   color: "white",
                   textDecoration: "none",
@@ -193,7 +207,7 @@ const Parametre = () => {
           <Row className="col-10 mt-5" style={rowStyle}>
             <button style={buttonStyle}>
               <Link
-                to="/"
+                to=""
                 style={{
                   color: "white",
                   textDecoration: "none",
@@ -221,6 +235,7 @@ const Parametre = () => {
               </Link>
             </button>
           </Row>
+          
         </div>
       </Row>
 
@@ -232,27 +247,41 @@ const Parametre = () => {
           }}
         >
           <Col>
-            <Link to="/">
-              <Button
-                style={{
-                  border: "none",
-                  backgroundColor:
-                    activeButton === "monProfil" ? "#E5D2EC" : "",
-                }}
-                onClick={() => handleNavButtonClick("monProfil")}
-              >
-                <img src={monProfilIcon} alt="monProfil" />
-              </Button>
-            </Link>
+            {isAsso ? (
+              <Link to="/feedAsso">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "monProfil" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("events")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/feedUser">
+                <Button
+                  style={{
+                    border: "none",
+                    backgroundColor:
+                      activeButton === "monProfil" ? "#E5D2EC" : "",
+                  }}
+                  onClick={() => handleNavButtonClick("monProfil")}
+                >
+                  <img src={monProfilIcon} alt="monProfil" />
+                </Button>
+              </Link>
+            )}
           </Col>
 
           <Col>
-            <Link to="/events">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
-                  backgroundColor:
-                    activeButton === "events" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "events" ? "#E5D2EC" : "",
                 }}
                 onClick={() => handleNavButtonClick("events")}
               >
@@ -261,7 +290,7 @@ const Parametre = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/messagerie">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -275,13 +304,13 @@ const Parametre = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/param">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
-                  backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "param" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("settings")}
+                onClick={() => handleNavButtonClick("param")}
               >
                 <img src={settingsIcon} alt="settings" />
               </Button>

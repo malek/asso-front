@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import Avatar from "./Avatar";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import wavyDiv from "../../assets/feedImages/wavy.svg";
@@ -27,8 +27,15 @@ import boiteComntaireIcon from "../../assets/feedImages/badges/autre/boiteComnta
 import etoilesIcon from "../../assets/feedImages/badges/autre/etoiles.svg";
 
 const FeedUser = () => {
-  const [activeButton, setActiveButton] = useState("monProfil");
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  var isAsso = params.get("param") === "true";
+
+
+  const [activeButton, setActiveButton] = useState("feedUser");
   const handleNavButtonClick = (buttonName) => {
+    isAsso = false;
+    window.location.href = `/${buttonName}?param=${isAsso}`;
     setActiveButton(buttonName);
   };
   const containerStyle = {
@@ -234,8 +241,8 @@ const FeedUser = () => {
               marginLeft: "5%",
             }}
           >
-            <button style={titreButtonStyle}>
-              <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+            <button style={titreButtonStyle} onClick={() => handleNavButtonClick("badges")} >
+              <Link to="" style={{ color: "white", textDecoration: "none" }}>
                 VOIR MES BADGES
               </Link>
             </button>
@@ -350,8 +357,8 @@ const FeedUser = () => {
               marginLeft: "5%",
             }}
           >
-            <button style={titreButtonStyle}>
-              <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+            <button style={titreButtonStyle} onClick={() => handleNavButtonClick("events")}>
+              <Link to="" style={{ color: "white", textDecoration: "none" }}>
                 CONSULTER MES EVENTS
               </Link>
             </button>
@@ -486,8 +493,8 @@ const FeedUser = () => {
               marginLeft: "5%",
             }}
           >
-            <button style={titreButtonStyle}>
-              <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+            <button style={titreButtonStyle}  onClick={() => handleNavButtonClick("evaluation")}>
+              <Link to="" style={{ color: "white", textDecoration: "none" }}>
                 CONSULTER MES ÉVALUATIONS
               </Link>
             </button>
@@ -503,9 +510,9 @@ const FeedUser = () => {
             marginLeft: "5%",
           }}
         >
-          <button style={titreButtonStyle}>
+          <button style={titreButtonStyle}  onClick={() => handleNavButtonClick("param")}>
             <Link
-              to="/param"
+              to=""
               style={{
                 color: "white",
                 textDecoration: "none",
@@ -539,14 +546,14 @@ const FeedUser = () => {
           }}
         >
           <Col>
-            <Link to="/feedUser">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
                   backgroundColor:
-                    activeButton === "monProfil" ? "#E5D2EC" : "",
+                    activeButton === "feedUser" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("monProfil")}
+                onClick={() => handleNavButtonClick("feedUser")}
               >
                 <img src={monProfilIcon} alt="monProfil" />
               </Button>
@@ -554,7 +561,7 @@ const FeedUser = () => {
           </Col>
 
           <Col>
-            <Link to="/events">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -567,7 +574,7 @@ const FeedUser = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/messagerie">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
@@ -581,15 +588,15 @@ const FeedUser = () => {
             </Link>
           </Col>
           <Col>
-            <Link to="/param">
+            <Link to="">
               <Button
                 style={{
                   border: "none",
-                  backgroundColor: activeButton === "settings" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "param" ? "#E5D2EC" : "",
                 }}
-                onClick={() => handleNavButtonClick("settings")}
+                onClick={() => handleNavButtonClick("param")}
               >
-                <img src={settingsIcon} alt="settings" />
+                <img src={settingsIcon} alt="param" />
               </Button>
             </Link>
           </Col>
