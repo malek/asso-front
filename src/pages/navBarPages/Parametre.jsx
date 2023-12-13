@@ -248,27 +248,27 @@ const Parametre = () => {
         >
           <Col>
             {isAsso ? (
-              <Link to="/feedAsso">
+              <Link to="">
                 <Button
                   style={{
                     border: "none",
                     backgroundColor:
-                      activeButton === "monProfil" ? "#E5D2EC" : "",
+                      activeButton === "feedAsso" ? "#E5D2EC" : "",
                   }}
-                  onClick={() => handleNavButtonClick("events")}
+                  onClick={() => handleNavButtonClick("feedAsso")}
                 >
                   <img src={monProfilIcon} alt="monProfil" />
                 </Button>
               </Link>
             ) : (
-              <Link to="/feedUser">
+              <Link to="">
                 <Button
                   style={{
                     border: "none",
                     backgroundColor:
-                      activeButton === "monProfil" ? "#E5D2EC" : "",
+                      activeButton === "feedUser" ? "#E5D2EC" : "",
                   }}
-                  onClick={() => handleNavButtonClick("monProfil")}
+                  onClick={() => handleNavButtonClick("feedUser")}
                 >
                   <img src={monProfilIcon} alt="monProfil" />
                 </Button>

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import doneIcone from "../../assets/inscription/doneInscription.svg";
-import purpleButtomFlowers from "../../assets/inscription/purpleButtomFlowers.svg";
 
 const FinalisationInscription = () => {
   const navigate = useNavigate();
@@ -72,7 +71,7 @@ const FinalisationInscription = () => {
   return (
     <div className="container p-4 mb-5">
       <Row>
-        <div className="d-flex flex-column align-items-center mb-5 mt-5">
+        <div className="d-flex flex-column align-items-center mb-3 mt-3">
           <h1
             style={{
               color: "white",
@@ -89,7 +88,7 @@ const FinalisationInscription = () => {
         <img src={doneIcone} alt="doneIcone" />
       </Row>
       <Row>
-        <div className="d-flex flex-column align-items-center mb-5 mt-5">
+        <div className="d-flex flex-column align-items-center mb-2 mt-5">
           <p
             className="fs-3"
             style={{
@@ -112,7 +111,7 @@ const FinalisationInscription = () => {
             marginTop: "10%",
           }}
         >
-          <Link to="/param">
+          <Link to="">
             <button style={buttonStyle} onClick={handleSubmit}>
               JE PARCOURS LES EVENTS !
             </button>
@@ -120,11 +119,7 @@ const FinalisationInscription = () => {
         </div>
       </Row>
 
-      <img
-        src={purpleButtomFlowers}
-        alt="purpleButtomFlowers"
-        style={imageStyle}
-      />
+     
     </div>
   );
 };

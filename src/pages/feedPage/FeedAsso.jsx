@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import wavyDiv from "../../assets/feedImages/wavy.svg";
-import userAvatar from "../../assets/feedImages/usersPic/associationPicture.jpg";
+import userAvatar from "../../assets/feedImages/usersPic/associationPicture.svg";
 
 //Icon pics
 import styloCircle from "../../assets/feedImages/associationFeedPics/styloCircle.svg";

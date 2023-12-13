@@ -4,13 +4,12 @@ import { Row, Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
-import Avatar from "../feedPage/Avatar";
 
 import wavyDiv from "../../assets/feedImages/wavy.svg";
 
 //user Pics
 import user1 from "../../assets/messagesUser/user1.svg";
-//import user1 from "../../assets/feedImages/usersPic/associationPicture.svg"; 
+//import user1 from "../../assets/feedImages/usersPic/associationPicture.svg";
 
 import user2 from "../../assets/messagesUser/user2.svg";
 import user3 from "../../assets/messagesUser/user3.svg";
@@ -24,7 +23,6 @@ import settingsIcon from "../../assets/feedImages/iconsNavBar/settingsIcon.svg";
 import eventsIcon from "../../assets/feedImages/iconsNavBar/eventsIcon.svg";
 
 const Messagerie = () => {
-  const [buttonClicked, setButtonClicked] = useState(false);
 
   //For the navBar btns
   const [activeButton, setActiveButton] = useState("messagerie");
@@ -74,21 +72,16 @@ const Messagerie = () => {
     borderRadius: "15px",
   };
 
-  const msgHistoriqueDivStyle = {
-    backgroundColor: "white",
-    height: "fit-content",
-    margin: "0 0 5% 5%", // Adjust the left and right margin as needed
-    padding: "2%",
-    borderRadius: "15px",
-    position: "relative", // Make sure the position is set to relative
-    zIndex: 1, // Set the z-index to a value higher than the button's z-index
-    width: "90%",
+
+  //the avatar pictures
+  const avatarStyle = {
+    // width: "161px", // Set your desired width
+    // height: "154px", // Set your desired height
+    borderRadius: "50%",
+    //  border: "5px solid #8675AA",
   };
-  const rowStyle = {
-    display: "flex",
-    alignItems: "start", // Align items in the center vertically
-    //marginBottom: "-10%", // Adjust margin as needed
-  };
+
+
 
   const divButtomNavBar = {
     backgroundColor: "#8675AA",
@@ -131,155 +124,170 @@ const Messagerie = () => {
           </Row>
         </div>
 
-        <div style={msgHistoriqueDivStyle}>
-          <Link to={""} onClick={() => handleNavButtonClick("MessagerieChat")}>
-          <Row style={rowStyle}>
-            <Col className="col-3" >
-          
-              <Avatar imageName={user1} />
-            </Col>
-            <Col>
-              <Row>
-                <p
-                  //className="fs-2"
-                  style={{
-                    letterSpacing: "2px",
-                    //  marginRight: "-20%",
-                    fontFamily: "SuperTea",
-                  }}
-                >
-                  Marie.J
-                </p>
-              </Row>
+          <Row className=" d-flex flex-column align-items-center mb-5 mt-2 ">
+            <Link
+              to={""}
+              onClick={() => handleNavButtonClick("MessagerieChat")}
+            >
+              <Row style={{ backgroundColor: "#FFFFFF" }}>
+                <Col className="col-3 mb-2 mt-2">
+                  <img src={user1} style={avatarStyle} alt="Avatar" />
+                </Col>
+                <Col>
+                  <Row>
+                    <p
+                      //className="fs-2"
+                      style={{
+                        letterSpacing: "2px",
+                        //  marginRight: "-20%",
+                        fontFamily: "SuperTea",
+                      }}
+                    >
+                      Marie.J
+                    </p>
+                  </Row>
 
-              <Row>
-                <p> Je serais ravie de participer !</p>
+                  <Row>
+                    <p> Je serais ravie de participer !</p>
+                  </Row>
+                </Col>
               </Row>
-            </Col>
-          </Row>
-          </Link>
-          
-          <Row style={{ backgroundColor: "#D9D9D9" }}>
-            <Col className="col-3">
-              {" "}
-              <Avatar imageName={user2} />
-            </Col>
-            <Col>
-              <Row>
-                <p
-                  //className="fs-2"
-                  style={{
-                    letterSpacing: "2px",
-                    //  marginRight: "-20%",
-                    fontFamily: "SuperTea",
-                  }}
-                >
-                  Lana.F
-                </p>
-              </Row>
+            </Link>
 
-              <Row>
-                <p> A quelle heure dois-je venir ?</p>
-              </Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="col-3">
-              {" "}
-              <Avatar imageName={user3} />
-            </Col>
-            <Col>
-              <Row>
-                <p
-                  //className="fs-2"
-                  style={{
-                    letterSpacing: "2px",
-                    //  marginRight: "-20%",
-                    fontFamily: "SuperTea",
-                  }}
-                >
-                  Javier.N
-                </p>
-              </Row>
+            <Link
+              to={""}
+              onClick={() => handleNavButtonClick("MessagerieChat")}
+            >
+              <Row style={{ backgroundColor: "#F6F6F6" }}>
+                <Col className="col-3 mb-2 mt-2">
+                  <img src={user2} style={avatarStyle} alt="Avatar" />
+                </Col>
+                <Col>
+                  <Row>
+                    <p
+                      //className="fs-2"
+                      style={{
+                        letterSpacing: "2px",
+                        //  marginRight: "-20%",
+                        fontFamily: "SuperTea",
+                      }}
+                    >
+                      Lana.F
+                    </p>
+                  </Row>
 
-              <Row>
-                <p> On peut parler sur insta !</p>
+                  <Row>
+                    <p> A quelle heure dois-je venir ?</p>
+                  </Row>
+                </Col>
               </Row>
-            </Col>
-          </Row>
-          <Row style={{ backgroundColor: "#D9D9D9" }}>
-            <Col className="col-3">
-              {" "}
-              <Avatar imageName={user4} />
-            </Col>
-            <Col>
-              <Row>
-                <p
-                  //className="fs-2"
-                  style={{
-                    letterSpacing: "2px",
-                    //  marginRight: "-20%",
-                    fontFamily: "SuperTea",
-                  }}
-                >
-                  Doun.K
-                </p>
-              </Row>
+            </Link>
+            <Link to={""}>
+              <Row style={{ backgroundColor: "#FFFFFF" }}>
+                <Col className="col-3 mb-2 mt-2">
+                  {" "}
+                  <img src={user3} style={avatarStyle} alt="Avatar" />
+                </Col>
+                <Col>
+                  <Row>
+                    <p
+                      //className="fs-2"
+                      style={{
+                        letterSpacing: "2px",
+                        //  marginRight: "-20%",
+                        fontFamily: "SuperTea",
+                      }}
+                    >
+                      Javier.N
+                    </p>
+                  </Row>
 
-              <Row>
-                <p> Est-il possible de garder...</p>
+                  <Row>
+                    <p> On peut parler sur insta !</p>
+                  </Row>
+                </Col>
               </Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="col-3">
-              {" "}
-              <Avatar imageName={user5} />
-            </Col>
-            <Col>
-              <Row>
-                <p
-                  //className="fs-2"
-                  style={{
-                    letterSpacing: "2px",
-                    //  marginRight: "-20%",
-                    fontFamily: "SuperTea",
-                  }}
-                >
-                  Mark.S
-                </p>
-              </Row>
+            </Link>
 
-              <Row>
-                <p> Mince ! Ce jour là je suis...</p>
-              </Row>
-            </Col>
-          </Row>
-          <Row style={{ backgroundColor: "#D9D9D9" }}>
-            <Col className="col-3">
-              {" "}
-              <Avatar imageName={user6} />
-            </Col>
-            <Col>
-              <Row>
-                <p
-                  //className="fs-2"
-                  style={{
-                    letterSpacing: "2px",
-                    //  marginRight: "-20%",
-                    fontFamily: "SuperTea",
-                  }}
-                >
-                  Jane.H
-                </p>
-              </Row>
+            <Link>
+              <Row style={{ backgroundColor: "#F6F6F6" }}>
+                <Col className="col-3 mb-2 mt-2">
+                  {" "}
+                  <img src={user4} style={avatarStyle} alt="Avatar" />
+                </Col>
+                <Col>
+                  <Row>
+                    <p
+                      //className="fs-2"
+                      style={{
+                        letterSpacing: "2px",
+                        //  marginRight: "-20%",
+                        fontFamily: "SuperTea",
+                      }}
+                    >
+                      Doun.K
+                    </p>
+                  </Row>
 
-              <Row>
-                <p> Je peux ramener un +1 ?</p>
+                  <Row>
+                    <p> Est-il possible de garder...</p>
+                  </Row>
+                </Col>
               </Row>
-            </Col>
+            </Link>
+
+            <Link>
+              <Row style={{ backgroundColor: "#FFFFFF" }}>
+                <Col className="col-3 mb-2 mt-2">
+                  <img src={user5} style={avatarStyle} alt="Avatar" />
+                </Col>
+                <Col>
+                  <Row>
+                    <p
+                      //className="fs-2"
+                      style={{
+                        letterSpacing: "2px",
+                        //  marginRight: "-20%",
+                        fontFamily: "SuperTea",
+                      }}
+                    >
+                      Mark.S
+                    </p>
+                  </Row>
+
+                  <Row>
+                    <p> Mince ! Ce jour là je suis...</p>
+                  </Row>
+                </Col>
+              </Row>
+            </Link>
+            <Link>
+              <Row style={{ backgroundColor: "#F6F6F6" }}>
+                <Col className="col-3 mb-2 mt-2">
+                  <img src={user6} style={avatarStyle} alt="Avatar" />
+                </Col>
+                <Col>
+                  <Row>
+                    <p
+                      //className="fs-2"
+                      style={{
+                        letterSpacing: "2px",
+                        //  marginRight: "-20%",
+                        fontFamily: "SuperTea",
+                      }}
+                    >
+                      Jane.H
+                    </p>
+                  </Row>
+
+                  <Row>
+                    <p> Je peux ramener un +1 ?</p>
+                  </Row>
+                </Col>
+              </Row>
+            </Link>
           </Row>
-        </div>
+        
       </Row>
 
       <div style={divButtomNavBar} className="align-items-center ">
@@ -290,7 +298,7 @@ const Messagerie = () => {
           }}
         >
           <Col>
-          {isAsso ? (
+            {isAsso ? (
               <Link to="/feedAsso">
                 <Button
                   style={{
@@ -324,8 +332,7 @@ const Messagerie = () => {
               <Button
                 style={{
                   border: "none",
-                  backgroundColor:
-                    activeButton === "events" ? "#E5D2EC" : "",
+                  backgroundColor: activeButton === "events" ? "#E5D2EC" : "",
                 }}
                 onClick={() => handleNavButtonClick("events")}
               >
