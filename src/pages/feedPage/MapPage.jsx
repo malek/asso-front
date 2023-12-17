@@ -1,7 +1,7 @@
 import wavyDiv from "../../assets/feedImages/wavy.svg";
 import { Row, Col } from "react-bootstrap";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { Link } from "react-router-dom";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import L from "leaflet";
