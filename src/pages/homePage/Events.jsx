@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import BeautifulCards from "../../components/card/BeautifulCards";
-import CardForm from "../../components/cardForm/cardForm";
 import { Button } from "react-bootstrap";
 import "../../assets/cardsImages/EventsPageStyles.css"; // Assurez-vous que le chemin est correct
 
