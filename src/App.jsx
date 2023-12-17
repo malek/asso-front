@@ -5,7 +5,7 @@ import HomeRoutes from "./routes/HomeRoutes";
 
 function App() {
   return (
-    <BrowserRouter basename={"/asso-front/"}>
+    <BrowserRouter basename={"/"}>
         {/* <Navbar /> */}
         {/* <div className="pt-5 mt-2"> */}
           <HomeRoutes />
