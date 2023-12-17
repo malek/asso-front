@@ -1,7 +1,10 @@
 import wavyDiv from "../../assets/feedImages/wavy.svg";
 import { Row, Col } from "react-bootstrap";
+
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { Link, useLocation } from "react-router-dom";
+
+
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
