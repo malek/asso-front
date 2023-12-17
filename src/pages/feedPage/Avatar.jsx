@@ -5,6 +5,7 @@ function Avatar({ imageName }) {
     width: "161px", // Set your desired width
     height: "154px", // Set your desired height
     borderRadius: "50%",
+    border: "5px solid #8675AA",
   };
 
   return (
